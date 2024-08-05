@@ -6,7 +6,7 @@ export function HeaderConnectWalletButton() {
   return (
     <ConnectButton.Custom>
       {({ openConnectModal }) => (
-        <div className="w-full px-4 sm:px-0">
+        <div className="w-fit">
           <button
             onClick={openConnectModal}
             type="button"

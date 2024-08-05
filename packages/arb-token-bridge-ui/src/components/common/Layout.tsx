@@ -7,7 +7,6 @@ import EclipseBottom from '@/images/eclipse_bottom.png'
 import { Toast } from './atoms/Toast'
 
 import 'react-toastify/dist/ReactToastify.css'
-import Navbar from '../Navbar/Navbar'
 
 const unica = localFont({
   src: [
@@ -51,7 +50,6 @@ export function Layout(props: LayoutProps) {
         aria-hidden
       />
       <div className="relative flex flex-col sm:min-h-screen">
-        <Navbar />
         <main className="grow">{props.children}</main>
         <Toast />
       </div>
