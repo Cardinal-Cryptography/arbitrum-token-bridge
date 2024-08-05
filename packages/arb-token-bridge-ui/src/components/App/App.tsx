@@ -237,6 +237,9 @@ function AppContent() {
   if (!tosAccepted) {
     return (
       <>
+        <div className="pointer-events-none opacity-50 grayscale">
+          <Navbar />
+        </div>
         <WelcomeDialog />
       </>
     )
@@ -244,15 +247,17 @@ function AppContent() {
 
   if (!isConnected) {
     return (
-      <div className="flex w-full flex-col justify-between gap-4 px-6  py-8 md:flex-row">
-        <div className="gap-4pt-12 flex flex-col items-start text-white">
-          <p className="text-5xl">No wallet connected</p>
-          <p className="text-xl">
-            Please connect your wallet to use the bridge.
-          </p>
+      <>
+        <Navbar />
+        <div className="flex w-full flex-col justify-between gap-4 px-6  py-8 md:flex-row">
+          <div className="gap-4pt-12 flex flex-col items-start text-white">
+            <p className="text-5xl">No wallet connected</p>
+            <p className="text-xl">
+              Please connect your wallet to use the bridge.
+            </p>
+          </div>
         </div>
-        <HeaderConnectWalletButton />
-      </div>
+      </>
     )
   }
 
