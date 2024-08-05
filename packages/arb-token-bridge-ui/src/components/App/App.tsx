@@ -42,6 +42,7 @@ import { HeaderConnectWalletButton } from '../common/HeaderConnectWalletButton'
 import { ProviderName, trackEvent } from '../../util/AnalyticsUtils'
 import { onDisconnectHandler } from '../../util/walletConnectUtils'
 import { addressIsSmartContract } from '../../util/AddressUtils'
+import Navbar from '../Navbar/Navbar'
 
 declare global {
   interface Window {
@@ -236,7 +237,6 @@ function AppContent() {
   if (!tosAccepted) {
     return (
       <>
-        <Header />
         <WelcomeDialog />
       </>
     )
@@ -244,18 +244,15 @@ function AppContent() {
 
   if (!isConnected) {
     return (
-      <>
-        <Header>
-          <HeaderConnectWalletButton />
-        </Header>
-
-        <div className="flex flex-col items-start gap-4 px-6 pb-8 pt-12 text-white">
+      <div className="flex w-full flex-col justify-between gap-4 px-6  py-8 md:flex-row">
+        <div className="gap-4pt-12 flex flex-col items-start text-white">
           <p className="text-5xl">No wallet connected</p>
           <p className="text-xl">
             Please connect your wallet to use the bridge.
           </p>
         </div>
-      </>
+        <HeaderConnectWalletButton />
+      </div>
     )
   }
 
@@ -276,9 +273,7 @@ function AppContent() {
 
   return (
     <>
-      <Header>
-        <HeaderAccountPopover />
-      </Header>
+      <Navbar />
       <TokenListSyncer />
       <BalanceUpdater />
       <ArbTokenBridgeStoreSyncWrapper />
