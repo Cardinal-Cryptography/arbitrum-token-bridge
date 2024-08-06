@@ -398,6 +398,56 @@ export const orbitMainnets: {
 }
 
 export const orbitTestnets: { [key in number]: OrbitChainConfig } = {
+  2039: {
+    confirmPeriodBlocks: 150, // 20,
+    chainId: 2039,
+    parentChainId: 11155111,
+    ethBridge: {
+      bridge: '0xCB5c0B38C45Fad0C20591E26b0b3C3809123994A',
+      inbox: '0xb27fd27987a71a6B77Fb8705bFb6010C411083EB',
+      sequencerInbox: '0x16Ef70c48EF4BaaCfdaa4AfdD37F69332832a0bD',
+      outbox: '0x1aE032759B823A71e08675Bab2bBaf9d6f26549C',
+      rollup: '0xC8C08A4DbbF3367c8441151591c3d935947CB42F'
+    },
+    nativeToken: '0x88607eBfa048E7898db5ECA9A0fbFf6bd9f959ee',
+    explorerUrl: 'https://aleph-zero.blockscout.com/',
+    rpcUrl: 'https://rpc.alephzero-testnet.gelato.digital',
+    name: 'Aleph Zero EVM Testnet',
+    slug: 'alephzero-testnet',
+    retryableLifetimeSeconds: 604800,
+    isCustom: true,
+    isTestnet: true,
+    tokenBridge: {
+      parentGatewayRouter: '0x834082BD7cF3DaE7e892B4d259DaE8Ed33623f47',
+      childGatewayRouter: '0x39420aF084d60834F5BCbF29717cFf9EA57a0a6d',
+      parentErc20Gateway: '0xa4FB064D61c993FCa95251fc94AbAd6b57dD87DB', // StandardGateway
+      childErc20Gateway: '0x55804f8400F25434626c18BcCBF932BFD0675cC6',
+      parentCustomGateway: '0x3f6E38497771d4494F5E15d0EC2c3823A7024737',
+      childCustomGateway: '0x8f27844677A4Fb322eE1e90419e7bEe8188D8c56',
+      parentWethGateway: '0x0000000000000000000000000000000000000000',
+      childWethGateway: '0x0000000000000000000000000000000000000000',
+      parentWeth: '0x0000000000000000000000000000000000000000',
+      childWeth: '0x0000000000000000000000000000000000000000',
+      parentProxyAdmin: '0xf2BB1c98E9530C5367323332e99813508C3eD0B1',
+      childProxyAdmin: '0x8F8806B8076EF35841311f044aA05B6e6115444C',
+      parentMultiCall: '0x73465577E9FD7Cd585E4270F23A9eBa99B92b6eD',
+      childMultiCall: '0x0edFEe11783D9f03cFF25D644f2FB64B1E70c773'
+    },
+    bridgeUiConfig: {
+      color: '#07B48F',
+      network: {
+        name: 'Aleph Zero EVM Testnet',
+        logo: '/images/XaiLogo.svg',
+        description: 'The testnet for Alephians.'
+      },
+      nativeTokenData: {
+        name: 'Test AZERO',
+        symbol: 'TZERO',
+        decimals: 18,
+        logoUrl: '/images/XaiLogo.svg'
+      }
+    }
+  },
   37714555429: {
     chainId: 37714555429,
     confirmPeriodBlocks: 150,
