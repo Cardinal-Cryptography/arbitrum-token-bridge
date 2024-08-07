@@ -2,13 +2,14 @@ import {
   ArbitrumNetwork,
   getChildrenForNetwork,
   getArbitrumNetwork,
-  getArbitrumNetworks,
+  // getArbitrumNetworks,
   registerCustomArbitrumNetwork
 } from '@arbitrum/sdk'
 
 import { loadEnvironmentVariableWithFallback } from './index'
 import { getBridgeUiConfigForChain } from './bridgeUiConfig'
 import { chainIdToInfuraUrl } from './infura'
+import { getOrbitChains } from './orbitChainsList'
 
 export enum ChainId {
   // L1
@@ -43,21 +44,22 @@ const l1Networks: { [chainId: number]: L1Network } = {
     chainId: ChainId.Sepolia,
     blockTime: 12,
     isTestnet: true
-  },
-  [ChainId.Holesky]: {
-    chainId: ChainId.Holesky,
-    blockTime: 12,
-    isTestnet: true
-  },
-  [ChainId.Local]: {
-    chainId: ChainId.Local,
-    blockTime: 12,
-    isTestnet: true
   }
+  // [ChainId.Holesky]: {
+  //   chainId: ChainId.Holesky,
+  //   blockTime: 12,
+  //   isTestnet: true
+  // },
+  // [ChainId.Local]: {
+  //   chainId: ChainId.Local,
+  //   blockTime: 12,
+  //   isTestnet: true
+  // }
 }
 
 export const getChains = () => {
-  const chains = [...Object.values(l1Networks), ...getArbitrumNetworks()]
+  // const chains = [...Object.values(l1Networks), ...getArbitrumNetworks()]
+  const chains = [...Object.values(l1Networks)]
 
   return chains.filter(chain => {
     // exclude L1 chains with no child chains
@@ -475,15 +477,18 @@ function isArbitrumChain(
 }
 
 export const TELEPORT_ALLOWLIST: { [id: number]: number[] } = {
-  [ChainId.Ethereum]: [1380012617, 70700], // Rari and PopApex
-  [ChainId.Sepolia]: [1918988905] // RARI Testnet
+  // [ChainId.Ethereum]: [1380012617, 70700], // Rari and PopApex
+  // [ChainId.Sepolia]: [1918988905] // RARI Testnet
 }
 
 export function getChildChainIds(chain: ArbitrumNetwork | L1Network) {
-  const childChainIds = [
-    ...getChildrenForNetwork(chain.chainId).map(chain => chain.chainId),
-    ...(TELEPORT_ALLOWLIST[chain.chainId] ?? []) // for considering teleport (L1-L3 transfers) we will get the L3 children of the chain, if present
-  ]
+  // const childChainIds = [
+  //   ...getChildrenForNetwork(chain.chainId).map(chain => chain.chainId),
+  //   ...(TELEPORT_ALLOWLIST[chain.chainId] ?? []) // for considering teleport (L1-L3 transfers) we will get the L3 children of the chain, if present
+  // ]
+  const childChainIds = getOrbitChains()
+    .filter(orbitChain => orbitChain.parentChainId === chain.chainId)
+    .map(orbitChain => orbitChain.chainId)
   return Array.from(new Set(childChainIds))
 }
 

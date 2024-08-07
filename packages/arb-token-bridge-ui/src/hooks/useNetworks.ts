@@ -1,18 +1,18 @@
 import { Chain } from 'wagmi'
 import { StaticJsonRpcProvider } from '@ethersproject/providers'
 import { useCallback, useMemo } from 'react'
-import { mainnet, arbitrum } from '@wagmi/core/chains'
+import { mainnet } from '@wagmi/core/chains'
 
 import { useArbQueryParams } from './useArbQueryParams'
 import { ChainId, getCustomChainsFromLocalStorage } from '../util/networks'
 import {
-  sepolia,
-  holesky,
-  arbitrumNova,
-  arbitrumSepolia,
-  localL1Network as local,
-  localL2Network as arbitrumLocal,
-  localL3Network as l3Local
+  sepolia
+  // holesky,
+  // arbitrumNova,
+  // arbitrumSepolia,
+  // localL1Network as local,
+  // localL2Network as arbitrumLocal,
+  // localL3Network as l3Local
 } from '../util/wagmi/wagmiAdditionalNetworks'
 
 import { getDestinationChainIds } from '../util/networks'
@@ -34,13 +34,13 @@ export function isSupportedChainId(
   return [
     mainnet.id,
     sepolia.id,
-    holesky.id,
-    arbitrum.id,
-    arbitrumNova.id,
-    arbitrumSepolia.id,
-    arbitrumLocal.id,
-    l3Local.id,
-    local.id,
+    // holesky.id,
+    // arbitrum.id,
+    // arbitrumNova.id,
+    // arbitrumSepolia.id,
+    // arbitrumLocal.id,
+    // l3Local.id,
+    // local.id,
     ...getOrbitChains().map(chain => chain.chainId),
     ...customChainIds
   ].includes(chainId)
@@ -64,7 +64,7 @@ export function sanitizeQueryParams({
   ) {
     return {
       sourceChainId: ChainId.Ethereum,
-      destinationChainId: ChainId.ArbitrumOne
+      destinationChainId: 41455 // A0EVM Mainnet chainId
     }
   }
 
