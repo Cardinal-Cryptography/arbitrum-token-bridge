@@ -399,7 +399,7 @@ export const orbitMainnets: {
 
 export const orbitTestnets: { [key in number]: OrbitChainConfig } = {
   2039: {
-    confirmPeriodBlocks: 150, // 20,
+    confirmPeriodBlocks: 150, // TODO: change value to mach the actual confirmation period of the A0EVM Testnet,
     chainId: 2039,
     parentChainId: 11155111,
     ethBridge: {
