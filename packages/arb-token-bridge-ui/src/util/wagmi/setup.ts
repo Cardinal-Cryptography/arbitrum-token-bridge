@@ -33,7 +33,7 @@ const chainList = isTestingEnvironment
       // arbitrum,
       // arbitrumNova,
       // // sepolia & arb sepolia are for tx history panel tests
-      // sepolia,
+      sepolia,
       // arbitrumSepolia,
       // holesky,
       // Orbit chains
