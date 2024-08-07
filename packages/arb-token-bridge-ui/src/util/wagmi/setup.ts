@@ -5,13 +5,13 @@ import { connectorsForWallets, getDefaultWallets } from '@rainbow-me/rainbowkit'
 import { trustWallet, okxWallet } from '@rainbow-me/rainbowkit/wallets'
 
 import {
-  sepolia,
-  arbitrumNova,
-  arbitrumSepolia,
-  localL1Network as local,
-  localL2Network as arbitrumLocal,
-  localL3Network as l3Local,
-  holesky
+  sepolia
+  // arbitrumNova,
+  // arbitrumSepolia,
+  // localL1Network as local,
+  // localL2Network as arbitrumLocal,
+  // localL3Network as l3Local,
+  // holesky
 } from './wagmiAdditionalNetworks'
 import { isTestingEnvironment } from '../CommonUtils'
 import { getCustomChainsFromLocalStorage, ChainId } from '../networks'
@@ -30,28 +30,28 @@ const chainList = isTestingEnvironment
   ? [
       // mainnet, arb1, & arb nova are for network switch tests
       mainnet,
-      arbitrum,
-      arbitrumNova,
-      // sepolia & arb sepolia are for tx history panel tests
-      sepolia,
-      arbitrumSepolia,
-      holesky,
+      // arbitrum,
+      // arbitrumNova,
+      // // sepolia & arb sepolia are for tx history panel tests
+      // sepolia,
+      // arbitrumSepolia,
+      // holesky,
       // Orbit chains
       ...wagmiOrbitChains,
-      // add local environments during testing
-      local,
-      arbitrumLocal,
-      l3Local,
+      // // add local environments during testing
+      // local,
+      // arbitrumLocal,
+      // l3Local,
       // user-added custom chains
       ...customChains
     ]
   : [
       mainnet,
-      arbitrum,
-      arbitrumNova,
+      // arbitrum,
+      // arbitrumNova,
       sepolia,
-      arbitrumSepolia,
-      holesky,
+      // arbitrumSepolia,
+      // holesky,
       ...wagmiOrbitChains,
       ...customChains
     ]
