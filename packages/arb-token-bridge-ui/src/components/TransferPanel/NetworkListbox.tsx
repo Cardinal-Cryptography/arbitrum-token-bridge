@@ -7,6 +7,7 @@ import { getNetworkName } from '../../util/networks'
 import { getBridgeUiConfigForChain } from '../../util/bridgeUiConfig'
 import { Transition } from '../common/Transition'
 import { NetworkImage } from '../common/NetworkImage'
+import chroma from 'chroma-js'
 
 export type NetworkListboxProps = {
   disabled?: boolean
@@ -14,6 +15,7 @@ export type NetworkListboxProps = {
   options: Chain[]
   value: Chain
   onChange: (value: Chain) => void
+  className?: string
 }
 
 export function NetworkListbox({
@@ -28,15 +30,17 @@ export function NetworkListbox({
   return (
     <Listbox
       as="div"
-      className="relative"
       disabled={disabled}
       value={value}
       onChange={onChange}
+      className="relative"
     >
       {({ open }) => (
         <>
           <Listbox.Button
-            style={{ backgroundColor }}
+            style={{
+              backgroundColor: chroma(backgroundColor).darken(3).hex()
+            }}
             className="arb-hover flex w-max items-center gap-1 rounded px-3 py-2 text-sm text-white md:gap-2 md:text-xl"
           >
             <span className="max-w-[220px] truncate leading-extra-tight md:max-w-[250px]">

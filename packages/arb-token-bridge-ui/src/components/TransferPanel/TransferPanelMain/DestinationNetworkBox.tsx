@@ -51,11 +51,10 @@ export function DestinationNetworkBox({
 
   return (
     <NetworkContainer
-      bgLogoHeight={58}
       network={networks.destinationChain}
       customAddress={destinationAddress}
     >
-      <NetworkListboxPlusBalancesContainer>
+      <NetworkListboxPlusBalancesContainer className="pb-6">
         <NetworkListbox label="To:" {...destinationNetworkListboxProps} />
         <BalancesContainer>
           {destinationAddressOrWalletAddress &&
@@ -142,7 +141,6 @@ export function DestinationNetworkBox({
             )}
         </BalancesContainer>
       </NetworkListboxPlusBalancesContainer>
-      <EstimatedGas chainType="destination" />
     </NetworkContainer>
   )
 }

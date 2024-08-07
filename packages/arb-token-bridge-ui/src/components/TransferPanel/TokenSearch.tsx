@@ -656,15 +656,6 @@ export function TokenSearch({
           <SearchPanel.CloseButton onClick={close} />
         </SearchPanel.PageTitle>
         <TokensPanel onTokenSelected={selectToken} />
-        <div className="flex justify-end pt-4">
-          {isFetchingTokenLists ? (
-            <SearchPanel.LoaderWithMessage loadingMessage="Fetching Tokens..." />
-          ) : (
-            <SearchPanel.MainPageCTA>
-              Manage token lists
-            </SearchPanel.MainPageCTA>
-          )}
-        </div>
       </SearchPanel.MainPage>
       <SearchPanel.SecondaryPage className={className}>
         <TokenListsPanel closePanel={close} />

@@ -6,6 +6,19 @@ export function getBridgeUiConfigForChain(chainId: number): BridgeUiConfig {
     network: Omit<BridgeUiConfig['network'], 'name'>
   }
 
+  const alephZeroEvmBaseConfig: BaseBridgeUiConfig = {
+    color: '#00eac7',
+    network: {
+      logo: '/images/azero/AzeroLogo.svg'
+    },
+    nativeTokenData: {
+      name: 'AlephZero',
+      symbol: 'AZERO',
+      decimals: 12,
+      logoUrl: '/images/azero/AzeroLogo.svg'
+    }
+  }
+
   const ethereumBaseConfig: BaseBridgeUiConfig = {
     color: '#454A75',
     network: {
@@ -23,6 +36,24 @@ export function getBridgeUiConfigForChain(chainId: number): BridgeUiConfig {
   const customChain = getCustomChainFromLocalStorageById(chainId)
 
   switch (chainId) {
+    case ChainId.AzeroEVMTesnet:
+      return {
+        ...alephZeroEvmBaseConfig,
+        network: {
+          ...alephZeroEvmBaseConfig.network,
+          name: 'Aleph Zero EVM Testnet',
+          description: 'Native token on Aleph Zero EVM Testnet'
+        }
+      }
+    case ChainId.AzeroEVM:
+      return {
+        ...alephZeroEvmBaseConfig,
+        network: {
+          ...alephZeroEvmBaseConfig.network,
+          name: 'Aleph Zero EVM',
+          description: 'Native token on Aleph Zero EVM'
+        }
+      }
     case ChainId.Ethereum:
       return {
         ...ethereumBaseConfig,
