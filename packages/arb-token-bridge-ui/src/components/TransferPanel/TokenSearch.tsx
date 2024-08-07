@@ -247,7 +247,7 @@ function TokensPanel({
   )
 
   const tokensToShow = useMemo(() => {
-    const tokenSearch = newToken.trim().toLowerCase()
+    // const tokenSearch = newToken.trim().toLowerCase()
     const tokenAddresses = [
       ...Object.keys(tokensFromUser),
       ...Object.keys(tokensFromLists)
@@ -275,92 +275,94 @@ function TokensPanel({
       // Deduplicate addresses
       ...new Set(tokenAddresses)
     ]
-    return tokens
-      .filter(address => {
-        // Derive the token object from the address string
-        let token = tokensFromUser[address] || tokensFromLists[address]
+    return (
+      tokens
+        // .filter(address => {
+        //   // Derive the token object from the address string
+        //   let token = tokensFromUser[address] || tokensFromLists[address]
 
-        if (isTokenArbitrumOneNativeUSDC(address)) {
-          // for token search as Arb One native USDC isn't in any lists
-          token = ARB_ONE_NATIVE_USDC_TOKEN
-        }
+        //   if (isTokenArbitrumOneNativeUSDC(address)) {
+        //     // for token search as Arb One native USDC isn't in any lists
+        //     token = ARB_ONE_NATIVE_USDC_TOKEN
+        //   }
 
-        if (isTokenArbitrumSepoliaNativeUSDC(address)) {
-          // for token search as Arb One native USDC isn't in any lists
-          token = ARB_SEPOLIA_NATIVE_USDC_TOKEN
-        }
+        //   if (isTokenArbitrumSepoliaNativeUSDC(address)) {
+        //     // for token search as Arb One native USDC isn't in any lists
+        //     token = ARB_SEPOLIA_NATIVE_USDC_TOKEN
+        //   }
 
-        if (isTokenArbitrumOneUSDCe(address) && isDepositMode && isOrbitChain) {
-          // hide USDC.e if depositing to an Orbit chain
-          return false
-        }
+        //   if (isTokenArbitrumOneUSDCe(address) && isDepositMode && isOrbitChain) {
+        //     // hide USDC.e if depositing to an Orbit chain
+        //     return false
+        //   }
 
-        // If the token on the list is used as a custom fee token, we remove the duplicate
-        if (
-          nativeCurrency.isCustom &&
-          address.toLowerCase() === nativeCurrency.address.toLowerCase()
-        ) {
-          return false
-        }
+        //   // If the token on the list is used as a custom fee token, we remove the duplicate
+        //   if (
+        //     nativeCurrency.isCustom &&
+        //     address.toLowerCase() === nativeCurrency.address.toLowerCase()
+        //   ) {
+        //     return false
+        //   }
 
-        // Which tokens to show while the search is not active
-        if (!tokenSearch) {
-          // Always show native currency
-          if (address === NATIVE_CURRENCY_IDENTIFIER) {
-            return true
+        //   // Which tokens to show while the search is not active
+        //   if (!tokenSearch) {
+        //     // Always show native currency
+        //     if (address === NATIVE_CURRENCY_IDENTIFIER) {
+        //       return true
+        //     }
+
+        //     // Always show official ARB token except from or to Orbit chain
+        //     if (token?.listIds.has(SPECIAL_ARBITRUM_TOKEN_TOKEN_LIST_ID)) {
+        //       return !isOrbitChain
+        //     }
+
+        //     const balance = getBalance(address)
+        //     // Only show tokens with a balance greater than zero
+        //     return balance && balance.gt(0)
+        //   }
+
+        //   if (address === NATIVE_CURRENCY_IDENTIFIER) {
+        //     return `${nativeCurrency.name}${nativeCurrency.symbol}`
+        //       .toLowerCase()
+        //       .includes(tokenSearch)
+        //   }
+
+        //   if (!token) {
+        //     return false
+        //   }
+
+        //   const { name, symbol, address: tokenAddress, l2Address = '' } = token
+
+        //   return (name + symbol + tokenAddress + l2Address)
+        //     .toLowerCase()
+        //     .includes(tokenSearch)
+        // })
+        .sort((address1: string, address2: string) => {
+          // Pin native currency to top
+          if (address1 === NATIVE_CURRENCY_IDENTIFIER) {
+            return -1
           }
 
-          // Always show official ARB token except from or to Orbit chain
-          if (token?.listIds.has(SPECIAL_ARBITRUM_TOKEN_TOKEN_LIST_ID)) {
-            return !isOrbitChain
+          // Pin native currency to top
+          if (address2 === NATIVE_CURRENCY_IDENTIFIER) {
+            return 1
           }
 
-          const balance = getBalance(address)
-          // Only show tokens with a balance greater than zero
-          return balance && balance.gt(0)
-        }
+          const bal1 = getBalance(address1)
+          const bal2 = getBalance(address2)
 
-        if (address === NATIVE_CURRENCY_IDENTIFIER) {
-          return `${nativeCurrency.name}${nativeCurrency.symbol}`
-            .toLowerCase()
-            .includes(tokenSearch)
-        }
-
-        if (!token) {
-          return false
-        }
-
-        const { name, symbol, address: tokenAddress, l2Address = '' } = token
-
-        return (name + symbol + tokenAddress + l2Address)
-          .toLowerCase()
-          .includes(tokenSearch)
-      })
-      .sort((address1: string, address2: string) => {
-        // Pin native currency to top
-        if (address1 === NATIVE_CURRENCY_IDENTIFIER) {
-          return -1
-        }
-
-        // Pin native currency to top
-        if (address2 === NATIVE_CURRENCY_IDENTIFIER) {
-          return 1
-        }
-
-        const bal1 = getBalance(address1)
-        const bal2 = getBalance(address2)
-
-        if (!(bal1 || bal2)) {
-          return 0
-        }
-        if (!bal1) {
-          return 1
-        }
-        if (!bal2) {
-          return -1
-        }
-        return bal1.gt(bal2) ? -1 : 1
-      })
+          if (!(bal1 || bal2)) {
+            return 0
+          }
+          if (!bal1) {
+            return 1
+          }
+          if (!bal2) {
+            return -1
+          }
+          return bal1.gt(bal2) ? -1 : 1
+        })
+    )
   }, [
     newToken,
     tokensFromUser,
