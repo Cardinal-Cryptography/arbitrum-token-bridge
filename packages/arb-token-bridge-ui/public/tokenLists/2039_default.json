@@ -8,7 +8,7 @@
       "name": "Weenus",
       "symbol": "WEENUS",
       "decimals": 18,
-      "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/31074.png",
+      "logoURI": "https://etherscan.io/token/images/weth_28.png",
       "extensions": {
         "bridgeInfo": {
           "11155111": {

@@ -9,15 +9,15 @@ import { useActions, useAppState } from '../../state'
 import {
   BRIDGE_TOKEN_LISTS,
   BridgeTokenList,
-  addBridgeTokenListToBridge,
-  SPECIAL_ARBITRUM_TOKEN_TOKEN_LIST_ID
+  addBridgeTokenListToBridge
+  // SPECIAL_ARBITRUM_TOKEN_TOKEN_LIST_ID
 } from '../../util/TokenListUtils'
 import {
   fetchErc20Data,
   erc20DataToErc20BridgeToken,
   isTokenArbitrumOneNativeUSDC,
   isTokenArbitrumSepoliaNativeUSDC,
-  isTokenArbitrumOneUSDCe,
+  // isTokenArbitrumOneUSDCe,
   getL2ERC20Address
 } from '../../util/TokenUtils'
 import { Button } from '../common/Button'
