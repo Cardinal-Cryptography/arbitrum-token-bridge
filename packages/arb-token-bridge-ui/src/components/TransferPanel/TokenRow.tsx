@@ -361,7 +361,7 @@ export function TokenRow({
     >
       <div className="flex w-full flex-row items-center justify-start space-x-4">
         {tokenLogoURI ? (
-          <Image
+          <SafeImage
             width="24"
             height="24"
             src={tokenLogoURI}
