@@ -32,7 +32,6 @@ import { useNetworks } from '../../hooks/useNetworks'
 import { useNetworksRelationship } from '../../hooks/useNetworksRelationship'
 import { TokenLogoFallback } from './TokenInfo'
 import { useBalanceOnSourceChain } from '../../hooks/useBalanceOnSourceChain'
-import Image from 'next/image'
 
 function tokenListIdsToNames(ids: number[]): string {
   return ids
