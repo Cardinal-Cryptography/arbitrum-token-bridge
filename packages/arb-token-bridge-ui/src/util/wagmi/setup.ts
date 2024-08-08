@@ -63,7 +63,7 @@ if (!projectId) {
 }
 
 const appInfo = {
-  appName: 'Bridge to Arbitrum',
+  appName: 'AlephZero EVM',
   projectId
 }
 

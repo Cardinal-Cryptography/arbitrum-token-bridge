@@ -43,42 +43,19 @@ import { DestinationNetworkBox } from './TransferPanelMain/DestinationNetworkBox
 import { SourceNetworkBox } from './TransferPanelMain/SourceNetworkBox'
 import { NetworkType } from './TransferPanelMain/utils'
 
-export function SwitchNetworksButton(
-  props: React.ButtonHTMLAttributes<HTMLButtonElement>
-) {
-  const { isSmartContractWallet, isLoading: isLoadingAccountType } =
-    useAccountType()
-
-  const disabled = isSmartContractWallet || isLoadingAccountType
-
-  const [networks, setNetworks] = useNetworks()
-
+export function TransferIconBox() {
   return (
     <div className="z-[1] flex h-4 w-full items-center justify-center lg:h-1">
-      <button
-        type="button"
-        disabled={disabled}
+      <div
         className={twMerge(
-          'group relative flex h-7 w-7 items-center justify-center rounded bg-gray-1 p-1',
-          disabled && 'pointer-events-none'
+          'group relative flex h-7 w-7 items-center justify-center rounded bg-gray-1 p-1'
         )}
-        onClick={() => {
-          setNetworks({
-            sourceChainId: networks.destinationChain.id,
-            destinationChainId: networks.sourceChain.id
-          })
-        }}
         aria-label="Switch Networks"
-        {...props}
       >
         <SwitchNetworkButtonBorderTop />
-        {isSmartContractWallet ? (
-          <ArrowDownIcon className="h-6 w-6 stroke-1 text-white" />
-        ) : (
-          <ArrowsUpDownIcon className="h-8 w-8 stroke-1 text-white transition duration-300 group-hover:rotate-180 group-hover:opacity-80" />
-        )}
+        <ArrowDownIcon className="h-6 w-6 stroke-1 text-white" />
         <SwitchNetworkButtonBorderBottom />
-      </button>
+      </div>
     </div>
   )
 }
@@ -153,7 +130,6 @@ function CustomAddressBanner({
 export function NetworkContainer({
   network,
   customAddress,
-  bgLogoHeight = 58,
   children
 }: {
   network: Chain
@@ -201,7 +177,11 @@ export function NetworkContainer({
           className="absolute left-0 top-0 h-full w-full bg-[-2px_0] bg-no-repeat bg-origin-content p-3 opacity-50"
           style={{
             backgroundImage,
-            backgroundSize: `auto ${bgLogoHeight + (isSmallScreen ? -12 : 0)}px`
+            backgroundSize: `auto 95%`,
+            maskImage:
+              'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))',
+            WebkitMaskImage:
+              'linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))'
           }}
         />
         <div className="relative space-y-3.5 bg-contain bg-no-repeat p-3 sm:flex-row">
@@ -248,12 +228,19 @@ export function BalancesContainer({ children }: { children: React.ReactNode }) {
 }
 
 export function NetworkListboxPlusBalancesContainer({
-  children
+  children,
+  className
 }: {
   children: React.ReactNode
+  className?: string
 }) {
   return (
-    <div className="flex flex-row flex-wrap items-center justify-between gap-1 gap-y-2.5 whitespace-nowrap">
+    <div
+      className={twMerge(
+        'flex flex-row flex-wrap items-center justify-between gap-1 gap-y-2.5 whitespace-nowrap',
+        className
+      )}
+    >
       {children}
     </div>
   )
@@ -448,7 +435,7 @@ export function TransferPanelMain({
         showUsdcSpecificInfo={showUSDCSpecificInfo}
       />
 
-      <SwitchNetworksButton />
+      <TransferIconBox />
 
       <DestinationNetworkBox
         customFeeTokenBalances={customFeeTokenBalances}

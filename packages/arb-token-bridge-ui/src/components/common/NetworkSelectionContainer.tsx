@@ -32,11 +32,12 @@ import { useNetworks } from '../../hooks/useNetworks'
 import { Transition } from './Transition'
 import { NetworkImage } from './NetworkImage'
 
-type NetworkType = 'core' | 'orbit'
+type NetworkType = 'core'
+// | 'orbit'
 
 enum ChainGroupName {
-  core = 'CORE CHAINS',
-  orbit = 'ORBIT CHAINS'
+  core = 'CORE CHAINS'
+  // orbit = 'ORBIT CHAINS'
 }
 
 type ChainGroupInfo = {
@@ -47,20 +48,20 @@ type ChainGroupInfo = {
 const chainGroupInfo: { [key in NetworkType]: ChainGroupInfo } = {
   core: {
     name: ChainGroupName.core
-  },
-  orbit: {
-    name: ChainGroupName.orbit,
-    description: (
-      <p className="mt-2 flex gap-1 whitespace-normal rounded bg-orange-dark px-2 py-1 text-xs text-orange">
-        <ShieldExclamationIcon className="h-4 w-4 shrink-0" />
-        <span>
-          Independent projects using Arbitrum technology. Orbit chains have
-          varying degrees of decentralization.{' '}
-          <span className="font-semibold">Bridge at your own risk.</span>
-        </span>
-      </p>
-    )
   }
+  // orbit: {
+  //   name: ChainGroupName.orbit,
+  //   description: (
+  //     <p className="mt-2 flex gap-1 whitespace-normal rounded bg-orange-dark px-2 py-1 text-xs text-orange">
+  //       <ShieldExclamationIcon className="h-4 w-4 shrink-0" />
+  //       <span>
+  //         Independent projects using Arbitrum technology. Orbit chains have
+  //         varying degrees of decentralization.{' '}
+  //         <span className="font-semibold">Bridge at your own risk.</span>
+  //       </span>
+  //     </p>
+  //   )
+  // }
 }
 
 function ChainTypeInfoRow({
@@ -141,22 +142,22 @@ function NetworkRow({
   )
 }
 
-function AddCustomOrbitChainButton() {
-  const [, setQueryParams] = useArbQueryParams()
-  const [isTestnetMode] = useIsTestnetMode()
-
-  const openSettingsPanel = () => setQueryParams({ settingsOpen: true })
-
-  if (!isTestnetMode) {
-    return null
-  }
-
-  return (
-    <button className="arb-hover text-sm underline" onClick={openSettingsPanel}>
-      <span>Add Custom Orbit Chain</span>
-    </button>
-  )
-}
+// function AddCustomOrbitChainButton() {
+//   const [, setQueryParams] = useArbQueryParams()
+//   const [isTestnetMode] = useIsTestnetMode()
+//
+//   const openSettingsPanel = () => setQueryParams({ settingsOpen: true })
+//
+//   if (!isTestnetMode) {
+//     return null
+//   }
+//
+//   return (
+//     <button className="arb-hover text-sm underline" onClick={openSettingsPanel}>
+//       <span>Add Custom Orbit Chain</span>
+//     </button>
+//   )
+// }
 
 function NetworksPanel({
   onNetworkRowClick,
@@ -212,9 +213,9 @@ function NetworksPanel({
     }
     return [
       ChainGroupName.core,
-      ...networksToShow.core,
-      ChainGroupName.orbit,
-      ...networksToShow.orbit
+      ...networksToShow.core
+      // ChainGroupName.orbit,
+      // ...networksToShow.orbit
     ]
   }, [isNetworkSearchResult, networksToShow])
 
@@ -251,11 +252,11 @@ function NetworksPanel({
         )
       }
 
-      if (networkOrChainTypeName === ChainGroupName.orbit) {
-        return (
-          <ChainTypeInfoRow chainGroup={chainGroupInfo.orbit} style={style} />
-        )
-      }
+      // if (networkOrChainTypeName === ChainGroupName.orbit) {
+      //   return (
+      //     <ChainTypeInfoRow chainGroup={chainGroupInfo.orbit} style={style} />
+      //   )
+      // }
 
       return (
         <NetworkRow
@@ -302,7 +303,6 @@ function NetworksPanel({
       </SearchPanelTable>
       <div className="flex justify-between pb-2">
         <TestnetToggle label="Testnet mode" includeToggleStateOnLabel />
-        <AddCustomOrbitChainButton />
       </div>
     </div>
   )

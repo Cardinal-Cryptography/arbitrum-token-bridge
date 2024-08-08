@@ -1,8 +1,11 @@
 import localFont from 'next/font/local'
 import React from 'react'
 import { twMerge } from 'tailwind-merge'
-import Image from 'next/image'
+import AzeroPattern from '@/images/azero/azero_pattern.svg'
+
 import EclipseBottom from '@/images/eclipse_bottom.png'
+
+import Image from 'next/image'
 
 import { Toast } from './atoms/Toast'
 
@@ -37,16 +40,15 @@ export type LayoutProps = {
 export function Layout(props: LayoutProps) {
   return (
     <div className={twMerge('relative flex-col', unica.className)}>
-      <Image
-        src={EclipseBottom}
-        alt="grains"
-        className="pointer-events-none absolute left-1/2 top-0 w-full -translate-x-1/2 rotate-180 opacity-20"
-        aria-hidden
+      <div
+        style={{ backgroundImage: `url(${AzeroPattern.src})` }}
+        className="pointer-events-none absolute left-0 top-0 h-full w-full opacity-50"
+        aria-hidden="true"
       />
       <Image
         src={EclipseBottom}
         alt="grains"
-        className="pointer-events-none absolute bottom-0 left-1/2 w-full -translate-x-1/2 opacity-20"
+        className="pointer-events-none absolute bottom-0 left-1/2 w-full -translate-x-1/2 opacity-10"
         aria-hidden
       />
       <div className="min-h-screen">

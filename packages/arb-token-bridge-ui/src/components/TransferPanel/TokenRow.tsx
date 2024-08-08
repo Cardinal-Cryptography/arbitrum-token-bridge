@@ -32,6 +32,7 @@ import { useNetworks } from '../../hooks/useNetworks'
 import { useNetworksRelationship } from '../../hooks/useNetworksRelationship'
 import { TokenLogoFallback } from './TokenInfo'
 import { useBalanceOnSourceChain } from '../../hooks/useBalanceOnSourceChain'
+import Image from 'next/image'
 
 function tokenListIdsToNames(ids: number[]): string {
   return ids
@@ -359,12 +360,17 @@ export function TokenRow({
       )}
     >
       <div className="flex w-full flex-row items-center justify-start space-x-4">
-        <SafeImage
-          src={tokenLogoURI}
-          alt={`${tokenName} logo`}
-          className="h-6 w-6 shrink-0"
-          fallback={<TokenLogoFallback />}
-        />
+        {tokenLogoURI ? (
+          <Image
+            width="24"
+            height="24"
+            src={tokenLogoURI}
+            alt={`${tokenName} logo`}
+            className="h-6 w-6 shrink-0"
+          />
+        ) : (
+          <TokenLogoFallback />
+        )}
 
         <div className="flex w-full flex-col items-start gap-1 truncate">
           <div className="flex w-full items-center gap-1">
