@@ -21,9 +21,11 @@ export enum ChainId {
   // L2
   ArbitrumOne = 42161,
   ArbitrumNova = 42170,
+  AzeroEVM = 41455,
   // L2 Testnets
   ArbitrumSepolia = 421614,
   ArbitrumLocal = 412346,
+  AzeroEVMTesnet = 2039,
   // L3 Testnets
   L3Local = 333333
 }
