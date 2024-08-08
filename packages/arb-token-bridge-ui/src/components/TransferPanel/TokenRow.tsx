@@ -32,7 +32,6 @@ import { useNetworks } from '../../hooks/useNetworks'
 import { useNetworksRelationship } from '../../hooks/useNetworksRelationship'
 import { TokenLogoFallback } from './TokenInfo'
 import { useBalanceOnSourceChain } from '../../hooks/useBalanceOnSourceChain'
-import Image from 'next/image'
 
 function tokenListIdsToNames(ids: number[]): string {
   return ids
@@ -361,7 +360,7 @@ export function TokenRow({
     >
       <div className="flex w-full flex-row items-center justify-start space-x-4">
         {tokenLogoURI ? (
-          <Image
+          <SafeImage
             width="24"
             height="24"
             src={tokenLogoURI}

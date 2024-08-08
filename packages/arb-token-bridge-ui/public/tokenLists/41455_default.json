@@ -1,0 +1,62 @@
+{
+  "name": "A0EVM token list",
+  "timestamp": "2024-06-28T09:16:36.457Z",
+  "tokens": [
+    {
+      "chainId": 41455,
+      "address": "0x4Ca4B85Ead5EA49892d3a81DbfAE2f5c2F75d53D",
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "logoURI": "https://etherscan.io/token/images/centre-usdc_28.png",
+      "extensions": {
+        "bridgeInfo": {
+          "1": {
+            "tokenAddress": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "originBridgeAddress": "0x2A5a79061b723BBF453ef7E07c583C750AFb9BD6",
+            "destBridgeAddress": "0xccaF21F002EAF230c9Fa810B34837a3739B70F7B"
+          }
+        }
+      }
+    },
+    {
+      "chainId": 41455,
+      "address": "0xD648529D4803d3467bA8850577BEd4e4b8Ae583C",
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6,
+      "logoURI": "https://etherscan.io/token/images/tethernew_32.png",
+      "extensions": {
+        "bridgeInfo": {
+          "1": {
+            "tokenAddress": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+            "originBridgeAddress": "0x2A5a79061b723BBF453ef7E07c583C750AFb9BD6",
+            "destBridgeAddress": "0xccaF21F002EAF230c9Fa810B34837a3739B70F7B"
+          }
+        }
+      }
+    },
+    {
+      "chainId": 41455,
+      "address": "0xB3f0eE446723f4258862D949B4c9688e7e7d35d3",
+      "name": "Wrapped Ether",
+      "symbol": "WETH",
+      "decimals": 18,
+      "logoURI": "https://etherscan.io/token/images/weth_28.png",
+      "extensions": {
+        "bridgeInfo": {
+          "1": {
+            "tokenAddress": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+            "originBridgeAddress": "0x2A5a79061b723BBF453ef7E07c583C750AFb9BD6",
+            "destBridgeAddress": "0xccaF21F002EAF230c9Fa810B34837a3739B70F7B"
+          }
+        }
+      }
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  }
+}

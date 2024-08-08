@@ -56,7 +56,7 @@ export const orbitMainnets: {
       parentWeth: '0x0000000000000000000000000000000000000000',
       childWeth: '0x0000000000000000000000000000000000000000',
       parentProxyAdmin: '0x80622fe04c5e1c3fbb3A9c62996dB27B53E9F77b',
-      childProxyAdmin: '',
+      childProxyAdmin: '0x8974CcD2c5D4DaB95795aFC69d2Ec5D02F935680',
       parentMultiCall: '0x7cdCB0Cc61f47B8Dd8f47C5A29edaDd84a1BDf5e',
       childMultiCall: '0xadA1e2BD204b976Da39699bd051264425c78D060'
     },

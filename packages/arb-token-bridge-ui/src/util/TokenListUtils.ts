@@ -165,6 +165,24 @@ export const BRIDGE_TOKEN_LISTS: BridgeTokenList[] = [
     name: 'Arbed Uniswap List',
     isDefault: true,
     logoURI: UniswapLogo
+  },
+  {
+    id: 19,
+    // A0EVM Testnet
+    originChainID: 2039,
+    url: 'tokenLists/2039_default.json',
+    name: 'A0EVM Testnet token list',
+    isDefault: true,
+    logoURI: '/images/XaiLogo.svg'
+  },
+  {
+    id: 20,
+    // A0EVM
+    originChainID: 41455,
+    url: 'tokenLists/41455_default.json',
+    name: 'A0EVM token list',
+    isDefault: true,
+    logoURI: '/images/XaiLogo.svg'
   }
 ]
 

@@ -1,0 +1,28 @@
+{
+  "name": "A0EVM Testnet token list",
+  "timestamp": "2024-06-28T09:16:36.457Z",
+  "tokens": [
+    {
+      "chainId": 2039,
+      "address": "0x4e5C576331d5960d543E7372A634EEd195f8F20a",
+      "name": "Weenus",
+      "symbol": "WEENUS",
+      "decimals": 18,
+      "logoURI": "https://etherscan.io/token/images/weth_28.png",
+      "extensions": {
+        "bridgeInfo": {
+          "11155111": {
+            "tokenAddress": "0x7439E9Bb6D8a84dd3A23fe621A30F95403F87fB9",
+            "originBridgeAddress": "0x55804f8400F25434626c18BcCBF932BFD0675cC6",
+            "destBridgeAddress": "0xa4FB064D61c993FCa95251fc94AbAd6b57dD87DB"
+          }
+        }
+      }
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  }
+}

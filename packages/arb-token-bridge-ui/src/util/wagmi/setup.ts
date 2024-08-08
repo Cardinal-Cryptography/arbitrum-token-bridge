@@ -1,5 +1,5 @@
 import { createClient, configureChains } from 'wagmi'
-import { mainnet, arbitrum } from '@wagmi/core/chains'
+import { mainnet } from '@wagmi/core/chains'
 import { publicProvider } from 'wagmi/providers/public'
 import { connectorsForWallets, getDefaultWallets } from '@rainbow-me/rainbowkit'
 import { trustWallet, okxWallet } from '@rainbow-me/rainbowkit/wallets'
@@ -33,7 +33,7 @@ const chainList = isTestingEnvironment
       // arbitrum,
       // arbitrumNova,
       // // sepolia & arb sepolia are for tx history panel tests
-      // sepolia,
+      sepolia,
       // arbitrumSepolia,
       // holesky,
       // Orbit chains
