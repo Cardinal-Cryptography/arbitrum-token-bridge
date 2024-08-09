@@ -372,7 +372,12 @@ export function useTransferReadiness({
             }
 
             // We have to check if there's enough of the custom fee token to cover L2 gas
-            if (estimatedL2GasFees > customFeeTokenL1BalanceFloat) {
+            // if (estimatedL2GasFees > customFeeTokenL1BalanceFloat) {
+            // CHANGE: disable enough for gas check (gifter pays the gas)
+            if (
+              estimatedL2GasFees > customFeeTokenL1BalanceFloat &&
+              selectedToken.isL2Native
+            ) {
               return notReady({
                 errorMessage: getInsufficientFundsForGasFeesErrorMessage({
                   asset: nativeCurrency.symbol,

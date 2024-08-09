@@ -132,7 +132,10 @@ function TotalGasFees() {
           {selectedToken && ' and '}
         </span>
       )}
+      {/* CHANGE: don't show gas fee in azero when bridging ERC20 (gifter pays the gas) */}
+      {/* {(selectedToken || !isDepositMode) && */}
       {(selectedToken || !isDepositMode) &&
+        selectedToken?.isL2Native &&
         formatAmount(estimatedChildChainGasFees, {
           symbol: childChainNativeCurrency.symbol
         })}
