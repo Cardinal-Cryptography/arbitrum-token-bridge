@@ -129,7 +129,7 @@ function TotalGasFees() {
             amount={estimatedParentChainGasFees}
             showBrackets
           />
-          {selectedToken && ' and '}
+          {selectedToken && selectedToken?.isL2Native && ' and '}
         </span>
       )}
       {/* CHANGE: don't show gas fee in azero when bridging ERC20 (gifter pays the gas) */}
