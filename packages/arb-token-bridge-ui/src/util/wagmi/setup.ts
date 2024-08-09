@@ -15,14 +15,14 @@ import {
 } from './wagmiAdditionalNetworks'
 import { isTestingEnvironment } from '../CommonUtils'
 import { getCustomChainsFromLocalStorage, ChainId } from '../networks'
-import { getOrbitChains } from '../orbitChainsList'
+import { getAlephChains } from '../alephChainsList'
 import { getWagmiChain } from './getWagmiChain'
 import { customInfuraProvider } from '../infura'
 
 const customChains = getCustomChainsFromLocalStorage().map(chain =>
   getWagmiChain(chain.chainId)
 )
-const wagmiOrbitChains = getOrbitChains().map(chain =>
+const wagmiOrbitChains = getAlephChains().map(chain =>
   getWagmiChain(chain.chainId)
 )
 

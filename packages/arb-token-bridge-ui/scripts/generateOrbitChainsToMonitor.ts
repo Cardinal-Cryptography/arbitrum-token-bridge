@@ -1,9 +1,9 @@
 import fs from 'fs'
-import { getOrbitChains } from '../src/util/orbitChainsList'
+import { getAlephChains as getAlephChains } from '../src/util/alephChainsList'
 import { getChainToMonitor } from './utils'
 
 async function generateOrbitChainsToMonitor() {
-  const orbitChains = getOrbitChains({ mainnet: true, testnet: false })
+  const orbitChains = getAlephChains({ mainnet: true, testnet: false })
 
   // make the orbit chain data compatible with the orbit-data required by the retryable-monitoring script
   const orbitChainsToMonitor = orbitChains.map(orbitChain => {

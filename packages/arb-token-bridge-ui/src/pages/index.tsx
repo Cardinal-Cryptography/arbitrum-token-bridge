@@ -8,7 +8,7 @@ import {
   getCustomChainsFromLocalStorage,
   mapCustomChainToNetworkData
 } from '../util/networks'
-import { getOrbitChains } from '../util/orbitChainsList'
+import { getAlephChains } from '../util/alephChainsList'
 import { sanitizeQueryParams } from '../hooks/useNetworks'
 import {
   decodeChainQueryParam,
@@ -65,7 +65,7 @@ function getDestinationWithSanitizedQueryParams(
 }
 
 function addOrbitChainsToArbitrumSDK() {
-  ;[...getOrbitChains(), ...getCustomChainsFromLocalStorage()].forEach(
+  ;[...getAlephChains(), ...getCustomChainsFromLocalStorage()].forEach(
     chain => {
       try {
         registerCustomArbitrumNetwork(chain)

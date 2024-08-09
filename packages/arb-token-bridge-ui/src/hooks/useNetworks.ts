@@ -17,7 +17,7 @@ import {
 
 import { getDestinationChainIds } from '../util/networks'
 import { getWagmiChain } from '../util/wagmi/getWagmiChain'
-import { getOrbitChains } from '../util/orbitChainsList'
+import { getAlephChains } from '../util/alephChainsList'
 import { getProviderForChainId } from '@/token-bridge-sdk/utils'
 
 export function isSupportedChainId(
@@ -41,7 +41,7 @@ export function isSupportedChainId(
     // arbitrumLocal.id,
     // l3Local.id,
     // local.id,
-    ...getOrbitChains().map(chain => chain.chainId),
+    ...getAlephChains().map(chain => chain.chainId),
     ...customChainIds
   ].includes(chainId)
 }
