@@ -68,14 +68,14 @@ export const alephMainnets: {
       color: '#036752',
       network: {
         name: 'Aleph Zero EVM',
-        logo: '/images/XaiLogo.svg',
+        logo: '/images/azero/AzeroLogo.svg',
         description: 'The Aleph Zero EVM.'
       },
       nativeTokenData: {
         name: 'AZERO',
         symbol: 'AZERO',
         decimals: 18,
-        logoUrl: '/images/XaiLogo.svg'
+        logoUrl: '/images/azero/AzeroLogo.svg'
       }
     }
   }
@@ -122,14 +122,14 @@ export const alpehTestnets: { [key in number]: AlephZeroChainConfig } = {
       color: '#07B48F',
       network: {
         name: 'Aleph Zero EVM Testnet',
-        logo: '/images/XaiLogo.svg',
+        logo: '/images/azero/AzeroLogo.svg',
         description: 'The testnet for Alephians.'
       },
       nativeTokenData: {
         name: 'Test AZERO',
         symbol: 'TZERO',
         decimals: 18,
-        logoUrl: '/images/XaiLogo.svg'
+        logoUrl: '/images/azero/AzeroLogo.svg'
       }
     }
   }

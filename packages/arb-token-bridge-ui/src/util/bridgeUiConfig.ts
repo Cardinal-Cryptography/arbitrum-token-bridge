@@ -14,7 +14,7 @@ export function getBridgeUiConfigForChain(chainId: number): BridgeUiConfig {
     nativeTokenData: {
       name: 'AlephZero',
       symbol: 'AZERO',
-      decimals: 12,
+      decimals: 18,
       logoUrl: '/images/azero/AzeroLogo.svg'
     }
   }
