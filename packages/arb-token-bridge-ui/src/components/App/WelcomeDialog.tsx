@@ -38,7 +38,7 @@ export function WelcomeDialog() {
         <p className="text-sm">
           Click the button below to agree to our{' '}
           <ExternalLink
-            href="https://arbitrum.io/tos"
+            href="https://common.fi/terms-of-service-app"
             className="arb-hover underline"
           >
             Terms of Service
