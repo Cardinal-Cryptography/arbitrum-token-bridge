@@ -62,7 +62,7 @@ export const alephMainnets: {
       childProxyAdmin: '0x8974CcD2c5D4DaB95795aFC69d2Ec5D02F935680',
       parentMultiCall: '0x7cdCB0Cc61f47B8Dd8f47C5A29edaDd84a1BDf5e',
       childMultiCall: '0xadA1e2BD204b976Da39699bd051264425c78D060',
-      gifter: ''
+      gifter: '0xE15AEB63EB2bF58A73DD871f4a1CF0D0A97f80f3'
     },
     bridgeUiConfig: {
       color: '#036752',
