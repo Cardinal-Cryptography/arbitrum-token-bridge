@@ -427,7 +427,29 @@ export function TransferPanelMain({
   ])
 
   return (
-    <div className="flex flex-col pb-6 lg:gap-y-1">
+    <div className="flex flex-col pb-6 lg:gap-y-1 ">
+      <div className=" relative mb-2 flex items-center gap-1 rounded border border-amber-500 border-opacity-50 bg-amber-500 bg-opacity-20  p-2 text-amber-100 transition-colors duration-400 lg:mb-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="icon icon-tabler icon-tabler-alert-circle stroke-amber-100"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+          <path d="M12 8v4" />
+          <path d="M12 16h.01" />
+        </svg>
+        <p className="mt-0.5">
+          Support for withdrawals from Aleph Zero EVM will be added soon
+        </p>
+      </div>
+
       <SourceNetworkBox
         amount={amount}
         errorMessage={errorMessage}
