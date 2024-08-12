@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export const siteTitle = 'AlephZero EVM Bridge'
-const siteDomain = 'https://bridge.arbitrum.io'
+const siteDomain = 'canbridge.alephzero.org'
 const siteDescription = 'AlephZero EVM Bridge'
 
 export default function Document() {
@@ -17,16 +17,12 @@ export default function Document() {
         <meta property="og:url" content={siteDomain} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={siteTitle} />
-        <meta property="og:description" content={siteDescription} />
-        <meta property="og:image" content={`${siteDomain}/og-image.jpg`} />
 
         {/* <!-- Twitter Meta Tags --> */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="bridge.arbitrum.io" />
+        <meta property="twitter:domain" content="canbridge.alephzero.org" />
         <meta property="twitter:url" content={siteDomain} />
         <meta name="twitter:title" content={siteTitle} />
-        <meta name="twitter:description" content={siteDescription} />
-        <meta name="twitter:image" content={`${siteDomain}/og-image.jpg`} />
       </Head>
       <body>
         <Main />
