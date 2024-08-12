@@ -2,12 +2,9 @@ import { twMerge } from 'tailwind-merge'
 import useLocalStorage from '@rehooks/local-storage'
 
 import { statsLocalStorageKey } from '../MainContent/ArbitrumStats'
-import { AddCustomChain } from './AddCustomChain'
 import { Switch } from './atoms/Switch'
 import { SidePanel } from './SidePanel'
 import { useArbQueryParams } from '../../hooks/useArbQueryParams'
-import { ExternalLink } from './ExternalLink'
-import { ORBIT_QUICKSTART_LINK } from '../../constants'
 import { TestnetToggle } from './TestnetToggle'
 
 import { useIsTestnetMode } from '../../hooks/useIsTestnetMode'
@@ -73,31 +70,6 @@ export const SettingsDialog = () => {
             label="Turn on testnet mode"
             description="Show testnet networks and enable other testnet features."
           />
-        </div>
-
-        {/* Add custom chain */}
-        <div
-          className={twMerge(
-            'w-full transition-opacity',
-            !isTestnetMode && 'pointer-events-none opacity-20'
-          )}
-        >
-          <SectionTitle className="mb-1">Add Testnet Orbit Chain</SectionTitle>
-          <p className="mb-4 text-sm">
-            Add in your own Orbit Testnet to the bridge. This will only be for
-            local testing.
-            <br />
-            Learn more about how to create and add your Orbit Testnet in{' '}
-            <ExternalLink
-              className="arb-hover underline"
-              href={ORBIT_QUICKSTART_LINK}
-            >
-              Arbitrum Orbit Quickstart
-            </ExternalLink>
-            .
-          </p>
-
-          <AddCustomChain />
         </div>
       </div>
     </SidePanel>
