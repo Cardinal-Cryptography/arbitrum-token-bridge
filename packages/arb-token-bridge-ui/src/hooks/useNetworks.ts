@@ -58,9 +58,13 @@ export function sanitizeQueryParams({
 } {
   // when both `sourceChain` and `destinationChain` are undefined or invalid, default to Ethereum and Arbitrum One
   if (
-    (!sourceChainId && !destinationChainId) ||
-    (!isSupportedChainId(sourceChainId) &&
-      !isSupportedChainId(destinationChainId))
+    // (!sourceChainId && !destinationChainId) ||
+    // (!isSupportedChainId(sourceChainId) &&
+    // CHANGE: default to Eth and A0EVM mainnet if any chain is undefined
+    !sourceChainId ||
+    !destinationChainId ||
+    !isSupportedChainId(sourceChainId) ||
+    !isSupportedChainId(destinationChainId)
   ) {
     return {
       sourceChainId: ChainId.Ethereum,
