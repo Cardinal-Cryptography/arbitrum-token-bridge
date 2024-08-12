@@ -66,6 +66,12 @@ export function sanitizeQueryParams({
     !isSupportedChainId(sourceChainId) ||
     !isSupportedChainId(destinationChainId)
   ) {
+    if (sourceChainId == ChainId.Sepolia) {
+      return {
+        sourceChainId: ChainId.Sepolia,
+        destinationChainId: ChainId.AzeroEVMTesnet
+      }
+    }
     return {
       sourceChainId: ChainId.Ethereum,
       destinationChainId: 41455 // A0EVM Mainnet chainId
