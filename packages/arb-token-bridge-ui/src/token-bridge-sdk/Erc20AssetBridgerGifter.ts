@@ -686,31 +686,7 @@ export class Erc20BridgerGifter extends AssetBridger<
       depositParams.maxSubmissionCost =
         params.maxSubmissionCost || depositParams.maxSubmissionCost
 
-      //   const iGatewayRouter = L1GatewayRouter__factory.createInterface()
-      //   const innerData =
-      //     this.getDepositRequestOutboundTransferInnerData(depositParams)
-
-      //   const functionData =
-      //     defaultedParams.excessFeeRefundAddress !== defaultedParams.from
-      //       ? iGatewayRouter.encodeFunctionData('outboundTransferCustomRefund', [
-      //           erc20ParentAddress,
-      //           defaultedParams.excessFeeRefundAddress,
-      //           destinationAddress,
-      //           amount,
-      //           depositParams.gasLimit,
-      //           depositParams.maxFeePerGas,
-      //           innerData
-      //         ])
-      //       : iGatewayRouter.encodeFunctionData('outboundTransfer', [
-      //           erc20ParentAddress,
-      //           destinationAddress,
-      //           amount,
-      //           depositParams.gasLimit,
-      //           depositParams.maxFeePerGas,
-      //           innerData
-      //         ])
-
-      // CHANGE: if gasLimit or maxFeePerGas is 1 trigger retryable ata error
+      // if gasLimit or maxFeePerGas is 1 trigger retryable ata error
       // https://github.com/OffchainLabs/arbitrum-sdk/blob/792a7ee3ccf09842653bc49b771671706894cbb4/src/lib/message/ParentToChildMessageGasEstimator.ts#L302-L335
       const retryable =
         depositParams.gasLimit.eq(constants.One) ||

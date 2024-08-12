@@ -58,20 +58,20 @@ export function sanitizeQueryParams({
 } {
   // when both `sourceChain` and `destinationChain` are undefined or invalid, default to Ethereum and Arbitrum One
   if (
-    // (!sourceChainId && !destinationChainId) ||
-    // (!isSupportedChainId(sourceChainId) &&
-    // CHANGE: default to Eth and A0EVM mainnet if any chain is undefined
     !sourceChainId ||
     !destinationChainId ||
     !isSupportedChainId(sourceChainId) ||
     !isSupportedChainId(destinationChainId)
   ) {
+    // for some reason getArbitrumNetwork(...) does not recognize AzeroEVMTesnet
+    // force check if selected L1 is Sepolia
     if (sourceChainId == ChainId.Sepolia) {
       return {
         sourceChainId: ChainId.Sepolia,
         destinationChainId: ChainId.AzeroEVMTesnet
       }
     }
+    //default to Eth and A0EVM mainnet if any chain is undefined
     return {
       sourceChainId: ChainId.Ethereum,
       destinationChainId: 41455 // A0EVM Mainnet chainId

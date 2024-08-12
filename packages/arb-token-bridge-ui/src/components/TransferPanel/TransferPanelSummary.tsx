@@ -132,7 +132,7 @@ function TotalGasFees() {
           {selectedToken && selectedToken?.isL2Native && ' and '}
         </span>
       )}
-      {/* CHANGE: don't show gas fee in azero when bridging ERC20 (gifter pays the gas) */}
+      {/* don't show gas fee in azero when bridging ERC20 (gifter pays the gas) */}
       {/* {(selectedToken || !isDepositMode) && */}
       {(selectedToken || !isDepositMode) &&
         selectedToken?.isL2Native &&
@@ -250,13 +250,6 @@ export function TransferPanelSummary({ token }: TransferPanelSummaryProps) {
               isParentChain={!isDepositMode}
             />
           )}
-          {/* CHANGE: show how much azero user gets as a gift on L2 */}
-          {/* {' and '}
-          <span className="tabular-nums">
-            {formatAmount(1 - (estimatedChildChainGasFees ?? 0), {
-              symbol: childChainNativeCurrency.symbol
-            })}
-          </span> */}
           {isBridgingEth && (
             <NativeCurrencyPrice amount={Number(amount)} showBrackets />
           )}

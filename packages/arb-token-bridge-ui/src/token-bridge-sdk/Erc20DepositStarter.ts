@@ -82,59 +82,9 @@ export class Erc20DepositStarter extends BridgeTransferStarter {
     if (!this.sourceChainErc20Address) {
       throw Error('Erc20 token address not found')
     }
-
-    // CHANGE: return false ("gifter pays the gas on L2")
+    // return false because gifter pays the gas on L2
+    // no need for user to approve Native L2 Token for fees
     return false
-
-    // const address = await getAddressFromSigner(signer)
-
-    // const erc20Bridger = await this.getBridger()
-    // const l2Network = erc20Bridger.childNetwork
-
-    // if (typeof l2Network.nativeToken === 'undefined') {
-    //   return false // native currency doesn't require approval
-    // }
-
-    // const nativeCurrency = ERC20__factory.connect(
-    //   l2Network.nativeToken,
-    //   this.sourceChainProvider
-    // )
-
-    // const customFeeTokenAllowanceForSourceChainGateway =
-    //   await fetchErc20Allowance({
-    //     address: l2Network.nativeToken,
-    //     provider: this.sourceChainProvider,
-    //     owner: address,
-    //     spender: await this.getSourceChainGatewayAddress()
-    //   })
-
-    // const gasEstimates = await this.transferEstimateGas({ amount, signer })
-
-    // const destinationChainGasPrice =
-    //   await this.destinationChainProvider.getGasPrice()
-
-    // const estimatedDestinationChainGasFeeEth = parseFloat(
-    //   utils.formatEther(
-    //     gasEstimates.estimatedChildChainGas
-    //       .mul(
-    //         percentIncrease(
-    //           destinationChainGasPrice,
-    //           DEFAULT_GAS_PRICE_PERCENT_INCREASE
-    //         )
-    //       )
-    //       .add(gasEstimates.estimatedChildChainSubmissionCost)
-    //   )
-    // )
-    // const estimatedDestinationChainGasFee = utils.parseUnits(
-    //   String(estimatedDestinationChainGasFeeEth),
-    //   await nativeCurrency.decimals()
-    // )
-
-    // // We want to bridge a certain amount of an ERC-20 token, but the Retryable fees on the destination chain will be paid in the custom fee token
-    // // We have to check if the native-token spending allowance is enough to cover the fees
-    // return customFeeTokenAllowanceForSourceChainGateway.lt(
-    //   estimatedDestinationChainGasFee
-    // )
   }
 
   public async approveNativeCurrencyEstimateGas({
@@ -222,7 +172,7 @@ export class Erc20DepositStarter extends BridgeTransferStarter {
       address: this.sourceChainErc20Address,
       provider: this.sourceChainProvider,
       owner: address,
-      // spender: await this.getSourceChainGatewayAddress()
+
       // CHANGE: the gifter should be the spender
       spender: erc20Bridger.gifter
     })

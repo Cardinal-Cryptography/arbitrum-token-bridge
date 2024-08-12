@@ -376,18 +376,6 @@ export function registerLocalNetwork() {
 }
 
 function isTestnetChain(chainId: ChainId) {
-  // CHANGE:
-  // const l1Network = l1Networks[chainId]
-  // if (l1Network) {
-  //   return l1Network.isTestnet
-  // }
-
-  // try {
-  //   return getArbitrumNetwork(chainId).isTestnet
-  // } catch {
-  //   // users could have data in local storage for chains that aren't supported anymore, avoid app error
-  //   return true
-  // }
   if (chainId == ChainId.Sepolia || chainId == ChainId.AzeroEVMTesnet)
     return true
   return false
