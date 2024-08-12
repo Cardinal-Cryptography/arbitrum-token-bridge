@@ -64,7 +64,7 @@ import { L2GatewayToken__factory } from '@arbitrum/sdk/dist/lib/abi/factories/L2
 import { L2ERC20Gateway__factory } from '@arbitrum/sdk/dist/lib/abi/factories/L2ERC20Gateway__factory'
 import { ICustomToken__factory } from '@arbitrum/sdk/dist/lib/abi/factories/ICustomToken__factory'
 import { IArbToken__factory } from '@arbitrum/sdk/dist/lib/abi/factories/IArbToken__factory'
-import { GifterV2__factory } from './gifter-abi/factories/GifterV2__factory'
+import { Gifter__factory } from './gifter-abi/factories/Gifter__factory'
 import { ParentToChildMessageGasParams } from '@arbitrum/sdk/dist/lib/message/ParentToChildMessageCreator'
 import { defaultAbiCoder } from 'ethers/lib/utils.js'
 import { GatewaySetEvent } from '@arbitrum/sdk/dist/lib/abi/L1GatewayRouter'
@@ -716,8 +716,8 @@ export class Erc20BridgerGifter extends AssetBridger<
         depositParams.gasLimit.eq(constants.One) ||
         depositParams.maxFeePerGas.eq(constants.One)
 
-      const iGifterV2 = GifterV2__factory.createInterface()
-      const functionData = iGifterV2.encodeFunctionData('outboundTransfer', [
+      const iGifter = Gifter__factory.createInterface()
+      const functionData = iGifter.encodeFunctionData('outboundTransfer', [
         erc20ParentAddress,
         destinationAddress,
         amount,
@@ -813,17 +813,17 @@ export class Erc20BridgerGifter extends AssetBridger<
           from: await params.parentSigner.getAddress()
         })
 
-    const iGifterV2 = GifterV2__factory.createInterface()
+    const iGifter = Gifter__factory.createInterface()
 
     const {
       txRequest: { data }
     } = params as any
 
-    const decodedFunctionData = iGifterV2.decodeFunctionData(
+    const decodedFunctionData = iGifter.decodeFunctionData(
       'outboundTransfer',
       data
     )
-    const functionData = iGifterV2.encodeFunctionData('outboundTransfer', [
+    const functionData = iGifter.encodeFunctionData('outboundTransfer', [
       decodedFunctionData._token,
       decodedFunctionData._to,
       decodedFunctionData._amount,
@@ -1332,7 +1332,7 @@ export const getErc20ParentAddressFromParentToChildTxRequestCustom = (
     txRequest: { data }
   } = txReq
 
-  const iGatewayRouter = GifterV2__factory.createInterface()
+  const iGatewayRouter = Gifter__factory.createInterface()
 
   try {
     const decodedData = iGatewayRouter.decodeFunctionData(
