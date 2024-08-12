@@ -17,7 +17,7 @@ import {
 
 import { getDestinationChainIds } from '../util/networks'
 import { getWagmiChain } from '../util/wagmi/getWagmiChain'
-import { getOrbitChains } from '../util/orbitChainsList'
+import { getAlephChains } from '../util/alephChainsList'
 import { getProviderForChainId } from '@/token-bridge-sdk/utils'
 
 export function isSupportedChainId(
@@ -41,7 +41,7 @@ export function isSupportedChainId(
     // arbitrumLocal.id,
     // l3Local.id,
     // local.id,
-    ...getOrbitChains().map(chain => chain.chainId),
+    ...getAlephChains().map(chain => chain.chainId),
     ...customChainIds
   ].includes(chainId)
 }
@@ -58,10 +58,20 @@ export function sanitizeQueryParams({
 } {
   // when both `sourceChain` and `destinationChain` are undefined or invalid, default to Ethereum and Arbitrum One
   if (
-    (!sourceChainId && !destinationChainId) ||
-    (!isSupportedChainId(sourceChainId) &&
-      !isSupportedChainId(destinationChainId))
+    !sourceChainId ||
+    !destinationChainId ||
+    !isSupportedChainId(sourceChainId) ||
+    !isSupportedChainId(destinationChainId)
   ) {
+    // for some reason getArbitrumNetwork(...) does not recognize AzeroEVMTesnet
+    // force check if selected L1 is Sepolia
+    if (sourceChainId == ChainId.Sepolia) {
+      return {
+        sourceChainId: ChainId.Sepolia,
+        destinationChainId: ChainId.AzeroEVMTesnet
+      }
+    }
+    //default to Eth and A0EVM mainnet if any chain is undefined
     return {
       sourceChainId: ChainId.Ethereum,
       destinationChainId: 41455 // A0EVM Mainnet chainId

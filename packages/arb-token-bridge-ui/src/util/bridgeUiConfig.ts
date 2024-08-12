@@ -1,5 +1,5 @@
 import { ChainId, getCustomChainFromLocalStorageById } from './networks'
-import { orbitChains, BridgeUiConfig } from './orbitChainsList'
+import { alephChains, BridgeUiConfig } from './alephChainsList'
 
 export function getBridgeUiConfigForChain(chainId: number): BridgeUiConfig {
   type BaseBridgeUiConfig = Omit<BridgeUiConfig, 'network'> & {
@@ -14,7 +14,7 @@ export function getBridgeUiConfigForChain(chainId: number): BridgeUiConfig {
     nativeTokenData: {
       name: 'AlephZero',
       symbol: 'AZERO',
-      decimals: 12,
+      decimals: 18,
       logoUrl: '/images/azero/AzeroLogo.svg'
     }
   }
@@ -137,7 +137,7 @@ export function getBridgeUiConfigForChain(chainId: number): BridgeUiConfig {
       }
     default: {
       // added Orbit chains
-      const orbitChain = orbitChains[chainId]
+      const orbitChain = alephChains[chainId]
 
       if (orbitChain) {
         return orbitChain.bridgeUiConfig

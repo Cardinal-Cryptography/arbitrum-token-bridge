@@ -9,7 +9,7 @@ import {
 import { loadEnvironmentVariableWithFallback } from './index'
 import { getBridgeUiConfigForChain } from './bridgeUiConfig'
 import { chainIdToInfuraUrl } from './infura'
-import { getOrbitChains } from './orbitChainsList'
+import { getAlephChains } from './alephChainsList'
 
 export enum ChainId {
   // L1
@@ -376,17 +376,9 @@ export function registerLocalNetwork() {
 }
 
 function isTestnetChain(chainId: ChainId) {
-  const l1Network = l1Networks[chainId]
-  if (l1Network) {
-    return l1Network.isTestnet
-  }
-
-  try {
-    return getArbitrumNetwork(chainId).isTestnet
-  } catch {
-    // users could have data in local storage for chains that aren't supported anymore, avoid app error
+  if (chainId == ChainId.Sepolia || chainId == ChainId.AzeroEVMTesnet)
     return true
-  }
+  return false
 }
 
 export function isNetwork(chainId: ChainId) {
@@ -488,7 +480,7 @@ export function getChildChainIds(chain: ArbitrumNetwork | L1Network) {
   //   ...getChildrenForNetwork(chain.chainId).map(chain => chain.chainId),
   //   ...(TELEPORT_ALLOWLIST[chain.chainId] ?? []) // for considering teleport (L1-L3 transfers) we will get the L3 children of the chain, if present
   // ]
-  const childChainIds = getOrbitChains()
+  const childChainIds = getAlephChains()
     .filter(orbitChain => orbitChain.parentChainId === chain.chainId)
     .map(orbitChain => orbitChain.chainId)
   return Array.from(new Set(childChainIds))

@@ -129,10 +129,13 @@ function TotalGasFees() {
             amount={estimatedParentChainGasFees}
             showBrackets
           />
-          {selectedToken && ' and '}
+          {selectedToken && selectedToken?.isL2Native && ' and '}
         </span>
       )}
+      {/* don't show gas fee in azero when bridging ERC20 (gifter pays the gas) */}
+      {/* {(selectedToken || !isDepositMode) && */}
       {(selectedToken || !isDepositMode) &&
+        selectedToken?.isL2Native &&
         formatAmount(estimatedChildChainGasFees, {
           symbol: childChainNativeCurrency.symbol
         })}
@@ -182,6 +185,8 @@ export function TransferPanelSummary({ token }: TransferPanelSummaryProps) {
   const isBridgingEth = useIsBridgingEth(childChainNativeCurrency)
 
   const [{ amount }] = useArbQueryParams()
+
+  // const { estimatedChildChainGasFees } = useGasSummary()
 
   const {
     isArbitrumOne: isDestinationChainArbitrumOne,

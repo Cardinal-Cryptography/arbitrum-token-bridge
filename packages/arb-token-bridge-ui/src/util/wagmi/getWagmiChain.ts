@@ -13,11 +13,11 @@ import {
 } from './wagmiAdditionalNetworks'
 import { ChainId } from '../networks'
 import { getCustomChainFromLocalStorageById } from '../networks'
-import { orbitChains } from '../orbitChainsList'
+import { alephChains } from '../alephChainsList'
 
 export function getWagmiChain(chainId: number): Chain {
   const customChain = getCustomChainFromLocalStorageById(chainId)
-  const orbitChain = orbitChains[chainId]
+  const orbitChain = alephChains[chainId]
 
   if (customChain) {
     return chainToWagmiChain(customChain)

@@ -1,3 +1,4 @@
+import { TokenBridge } from '@arbitrum/sdk/dist/lib/dataEntities/networks'
 import { NativeCurrencyBase } from '../hooks/useNativeCurrency'
 import { ChainWithRpcUrl } from './networks'
 
@@ -18,12 +19,14 @@ export type BridgeUiConfig = {
   nativeTokenData?: NativeCurrencyBase
 }
 
-export type OrbitChainConfig = ChainWithRpcUrl & {
-  bridgeUiConfig: BridgeUiConfig
-}
+export type AlephZeroChainConfig = Omit<ChainWithRpcUrl, 'tokenBridge'> &
+  ChainWithRpcUrl & {
+    bridgeUiConfig: BridgeUiConfig
+    tokenBridge: TokenBridge & { gifter: string }
+  }
 
-export const orbitMainnets: {
-  [key: number]: OrbitChainConfig
+export const alephMainnets: {
+  [key: number]: AlephZeroChainConfig
 } = {
   41455: {
     confirmPeriodBlocks: 150, // 20,
@@ -58,26 +61,27 @@ export const orbitMainnets: {
       parentProxyAdmin: '0x80622fe04c5e1c3fbb3A9c62996dB27B53E9F77b',
       childProxyAdmin: '0x8974CcD2c5D4DaB95795aFC69d2Ec5D02F935680',
       parentMultiCall: '0x7cdCB0Cc61f47B8Dd8f47C5A29edaDd84a1BDf5e',
-      childMultiCall: '0xadA1e2BD204b976Da39699bd051264425c78D060'
+      childMultiCall: '0xadA1e2BD204b976Da39699bd051264425c78D060',
+      gifter: '0xE15AEB63EB2bF58A73DD871f4a1CF0D0A97f80f3'
     },
     bridgeUiConfig: {
       color: '#036752',
       network: {
         name: 'Aleph Zero EVM',
-        logo: '/images/XaiLogo.svg',
+        logo: '/images/azero/AzeroLogo.svg',
         description: 'The Aleph Zero EVM.'
       },
       nativeTokenData: {
         name: 'AZERO',
         symbol: 'AZERO',
         decimals: 18,
-        logoUrl: '/images/XaiLogo.svg'
+        logoUrl: '/images/azero/AzeroLogo.svg'
       }
     }
   }
 }
 
-export const orbitTestnets: { [key in number]: OrbitChainConfig } = {
+export const alpehTestnets: { [key in number]: AlephZeroChainConfig } = {
   2039: {
     confirmPeriodBlocks: 150, // TODO: change value to mach the actual confirmation period of the A0EVM Testnet,
     chainId: 2039,
@@ -111,28 +115,29 @@ export const orbitTestnets: { [key in number]: OrbitChainConfig } = {
       parentProxyAdmin: '0xf2BB1c98E9530C5367323332e99813508C3eD0B1',
       childProxyAdmin: '0x8F8806B8076EF35841311f044aA05B6e6115444C',
       parentMultiCall: '0x73465577E9FD7Cd585E4270F23A9eBa99B92b6eD',
-      childMultiCall: '0x0edFEe11783D9f03cFF25D644f2FB64B1E70c773'
+      childMultiCall: '0x0edFEe11783D9f03cFF25D644f2FB64B1E70c773',
+      gifter: '0x0c33916c3ABfB6AA1cd784e22dDea4DBF869Ba64'
     },
     bridgeUiConfig: {
       color: '#07B48F',
       network: {
         name: 'Aleph Zero EVM Testnet',
-        logo: '/images/XaiLogo.svg',
+        logo: '/images/azero/AzeroLogo.svg',
         description: 'The testnet for Alephians.'
       },
       nativeTokenData: {
         name: 'Test AZERO',
         symbol: 'TZERO',
         decimals: 18,
-        logoUrl: '/images/XaiLogo.svg'
+        logoUrl: '/images/azero/AzeroLogo.svg'
       }
     }
   }
 }
 
-export const orbitChains = { ...orbitMainnets, ...orbitTestnets }
+export const alephChains = { ...alephMainnets, ...alpehTestnets }
 
-export function getOrbitChains(
+export function getAlephChains(
   {
     mainnet,
     testnet
@@ -140,23 +145,23 @@ export function getOrbitChains(
     mainnet: boolean
     testnet: boolean
   } = { mainnet: true, testnet: true }
-): OrbitChainConfig[] {
-  const mainnetChains = mainnet ? Object.values(orbitMainnets) : []
-  const testnetChains = testnet ? Object.values(orbitTestnets) : []
+): AlephZeroChainConfig[] {
+  const mainnetChains = mainnet ? Object.values(alephMainnets) : []
+  const testnetChains = testnet ? Object.values(alpehTestnets) : []
 
   return [...mainnetChains, ...testnetChains]
 }
 
 export function getInboxAddressFromOrbitChainId(chainId: number) {
   return (
-    getOrbitChains()
+    getAlephChains()
       //
       .find(chain => chain.chainId === chainId)?.ethBridge.inbox
   )
 }
 
 export function getChainIdFromInboxAddress(inboxAddress: string) {
-  return getOrbitChains().find(
+  return getAlephChains().find(
     chain => chain.ethBridge.inbox.toLowerCase() === inboxAddress.toLowerCase()
   )?.chainId
 }

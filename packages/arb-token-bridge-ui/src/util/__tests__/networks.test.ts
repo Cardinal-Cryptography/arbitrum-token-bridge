@@ -5,12 +5,12 @@ import {
   getBaseChainIdByChainId,
   getSupportedChainIds
 } from '../networks'
-import { orbitTestnets } from '../orbitChainsList'
+import { alpehTestnets } from '../alephChainsList'
 
 const xaiTestnetChainId = 37714555429
 
 beforeAll(() => {
-  const xaiTestnet = orbitTestnets[xaiTestnetChainId]
+  const xaiTestnet = alpehTestnets[xaiTestnetChainId]
 
   if (!xaiTestnet) {
     throw new Error(`Could not find Xai Testnet in the Orbit chains list.`)
