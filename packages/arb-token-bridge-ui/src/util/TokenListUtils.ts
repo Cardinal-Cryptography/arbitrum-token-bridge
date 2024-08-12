@@ -7,10 +7,24 @@ import UniswapLogo from '@/images/lists/uniswap.png'
 import CMCLogo from '@/images/lists/cmc.png'
 import CoinGeckoLogo from '@/images/lists/coinGecko.svg'
 import ArbitrumLogo from '@/images/lists/ArbitrumLogo.png'
-import { ArbTokenBridge } from '../hooks/arbTokenBridge.types'
+import {
+  ArbTokenBridge,
+  ERC20BridgeToken,
+  TokenType
+} from '../hooks/arbTokenBridge.types'
 import { ChainId } from './networks'
 
 export const SPECIAL_ARBITRUM_TOKEN_TOKEN_LIST_ID = 0
+
+export const defaultAzeroEvmToken: ERC20BridgeToken = {
+  name: 'Tether USD',
+  type: TokenType.ERC20,
+  symbol: 'USDT',
+  address: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+  decimals: 6,
+  l2Address: '0xd648529d4803d3467ba8850577bed4e4b8ae583c',
+  listIds: new Set([20])
+}
 
 export interface BridgeTokenList {
   id: number

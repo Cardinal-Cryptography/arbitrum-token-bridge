@@ -24,7 +24,12 @@ import { MainContent } from '../MainContent/MainContent'
 import { ArbTokenBridgeStoreSync } from '../syncers/ArbTokenBridgeStoreSync'
 import { BalanceUpdater } from '../syncers/BalanceUpdater'
 import { TokenListSyncer } from '../syncers/TokenListSyncer'
-import { getNetworkName, isNetwork, rpcURLs } from '../../util/networks'
+import {
+  ChainId,
+  getNetworkName,
+  isNetwork,
+  rpcURLs
+} from '../../util/networks'
 import {
   ArbQueryParamProvider,
   useArbQueryParams
@@ -40,6 +45,7 @@ import { ProviderName, trackEvent } from '../../util/AnalyticsUtils'
 import { onDisconnectHandler } from '../../util/walletConnectUtils'
 import { addressIsSmartContract } from '../../util/AddressUtils'
 import Navbar from '../Navbar/Navbar'
+import { defaultAzeroEvmToken } from '../../util/TokenListUtils'
 
 declare global {
   interface Window {
@@ -133,6 +139,10 @@ const ArbTokenBridgeStoreSyncWrapper = (): JSX.Element | null => {
         provider: childChainProvider
       }
     })
+    // if AzeroEVM chosen, default to custom ERC20 token
+    if (childChain.id === ChainId.AzeroEVM) {
+      actions.app.setSelectedToken(defaultAzeroEvmToken)
+    }
   }, [
     networks.sourceChain.id,
     parentChain.id,
