@@ -116,7 +116,7 @@ export const alpehTestnets: { [key in number]: AlephZeroChainConfig } = {
       childProxyAdmin: '0x8F8806B8076EF35841311f044aA05B6e6115444C',
       parentMultiCall: '0x73465577E9FD7Cd585E4270F23A9eBa99B92b6eD',
       childMultiCall: '0x0edFEe11783D9f03cFF25D644f2FB64B1E70c773',
-      gifter: '0x8e29fc4ea3A826F9855634197484b44342a86e68'
+      gifter: '0x0c33916c3ABfB6AA1cd784e22dDea4DBF869Ba64'
     },
     bridgeUiConfig: {
       color: '#07B48F',

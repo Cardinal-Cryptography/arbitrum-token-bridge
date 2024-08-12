@@ -35,8 +35,10 @@ export interface GifterInterface extends utils.Interface {
     "gasPriceBid()": FunctionFragment;
     "initialize(address,address,uint256,uint256,address)": FunctionFragment;
     "maxGas()": FunctionFragment;
-    "outboundTransfer(address,address,uint256)": FunctionFragment;
+    "outboundTransfer(address,address,uint256,bool)": FunctionFragment;
     "owner()": FunctionFragment;
+    "pause()": FunctionFragment;
+    "paused()": FunctionFragment;
     "pendingOwner()": FunctionFragment;
     "proxiableUUID()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
@@ -46,7 +48,9 @@ export interface GifterInterface extends utils.Interface {
     "setMaxGas(uint256)": FunctionFragment;
     "setRouter(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "unpause()": FunctionFragment;
     "upgradeToAndCall(address,bytes)": FunctionFragment;
+    "withdrawAzero(address,uint256)": FunctionFragment;
   };
 
   getFunction(
@@ -59,6 +63,8 @@ export interface GifterInterface extends utils.Interface {
       | "maxGas"
       | "outboundTransfer"
       | "owner"
+      | "pause"
+      | "paused"
       | "pendingOwner"
       | "proxiableUUID"
       | "renounceOwnership"
@@ -68,7 +74,9 @@ export interface GifterInterface extends utils.Interface {
       | "setMaxGas"
       | "setRouter"
       | "transferOwnership"
+      | "unpause"
       | "upgradeToAndCall"
+      | "withdrawAzero"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -91,9 +99,11 @@ export interface GifterInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "maxGas", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "outboundTransfer",
-    values: [string, string, BigNumberish]
+    values: [string, string, BigNumberish, boolean]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pause", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pendingOwner",
     values?: undefined
@@ -121,9 +131,14 @@ export interface GifterInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "upgradeToAndCall",
     values: [string, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawAzero",
+    values: [string, BigNumberish]
   ): string;
 
   decodeFunctionResult(
@@ -146,6 +161,8 @@ export interface GifterInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pendingOwner",
     data: BytesLike
@@ -170,8 +187,13 @@ export interface GifterInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "upgradeToAndCall",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawAzero",
     data: BytesLike
   ): Result;
 
@@ -179,12 +201,16 @@ export interface GifterInterface extends utils.Interface {
     "Initialized(uint64)": EventFragment;
     "OwnershipTransferStarted(address,address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
+    "Paused(address)": EventFragment;
+    "Unpaused(address)": EventFragment;
     "Upgraded(address)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Initialized"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferStarted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Paused"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Unpaused"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Upgraded"): EventFragment;
 }
 
@@ -218,6 +244,20 @@ export type OwnershipTransferredEvent = TypedEvent<
 
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
+
+export interface PausedEventObject {
+  account: string;
+}
+export type PausedEvent = TypedEvent<[string], PausedEventObject>;
+
+export type PausedEventFilter = TypedEventFilter<PausedEvent>;
+
+export interface UnpausedEventObject {
+  account: string;
+}
+export type UnpausedEvent = TypedEvent<[string], UnpausedEventObject>;
+
+export type UnpausedEventFilter = TypedEventFilter<UnpausedEvent>;
 
 export interface UpgradedEventObject {
   implementation: string;
@@ -278,10 +318,17 @@ export interface Gifter extends BaseContract {
       _token: string,
       _to: string,
       _amount: BigNumberish,
+      _retryable: boolean,
       overrides?: PayableOverrides & { from?: string }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
+
+    pause(
+      overrides?: Overrides & { from?: string }
+    ): Promise<ContractTransaction>;
+
+    paused(overrides?: CallOverrides): Promise<[boolean]>;
 
     pendingOwner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -318,10 +365,20 @@ export interface Gifter extends BaseContract {
       overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
 
+    unpause(
+      overrides?: Overrides & { from?: string }
+    ): Promise<ContractTransaction>;
+
     upgradeToAndCall(
       newImplementation: string,
       data: BytesLike,
       overrides?: PayableOverrides & { from?: string }
+    ): Promise<ContractTransaction>;
+
+    withdrawAzero(
+      to: string,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<ContractTransaction>;
   };
 
@@ -350,10 +407,17 @@ export interface Gifter extends BaseContract {
     _token: string,
     _to: string,
     _amount: BigNumberish,
+    _retryable: boolean,
     overrides?: PayableOverrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
+
+  pause(
+    overrides?: Overrides & { from?: string }
+  ): Promise<ContractTransaction>;
+
+  paused(overrides?: CallOverrides): Promise<boolean>;
 
   pendingOwner(overrides?: CallOverrides): Promise<string>;
 
@@ -390,10 +454,20 @@ export interface Gifter extends BaseContract {
     overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
+  unpause(
+    overrides?: Overrides & { from?: string }
+  ): Promise<ContractTransaction>;
+
   upgradeToAndCall(
     newImplementation: string,
     data: BytesLike,
     overrides?: PayableOverrides & { from?: string }
+  ): Promise<ContractTransaction>;
+
+  withdrawAzero(
+    to: string,
+    value: BigNumberish,
+    overrides?: Overrides & { from?: string }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -420,10 +494,15 @@ export interface Gifter extends BaseContract {
       _token: string,
       _to: string,
       _amount: BigNumberish,
+      _retryable: boolean,
       overrides?: CallOverrides
     ): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
+
+    pause(overrides?: CallOverrides): Promise<void>;
+
+    paused(overrides?: CallOverrides): Promise<boolean>;
 
     pendingOwner(overrides?: CallOverrides): Promise<string>;
 
@@ -449,9 +528,17 @@ export interface Gifter extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    unpause(overrides?: CallOverrides): Promise<void>;
+
     upgradeToAndCall(
       newImplementation: string,
       data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    withdrawAzero(
+      to: string,
+      value: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -477,6 +564,12 @@ export interface Gifter extends BaseContract {
       previousOwner?: string | null,
       newOwner?: string | null
     ): OwnershipTransferredEventFilter;
+
+    "Paused(address)"(account?: null): PausedEventFilter;
+    Paused(account?: null): PausedEventFilter;
+
+    "Unpaused(address)"(account?: null): UnpausedEventFilter;
+    Unpaused(account?: null): UnpausedEventFilter;
 
     "Upgraded(address)"(implementation?: string | null): UpgradedEventFilter;
     Upgraded(implementation?: string | null): UpgradedEventFilter;
@@ -508,10 +601,15 @@ export interface Gifter extends BaseContract {
       _token: string,
       _to: string,
       _amount: BigNumberish,
+      _retryable: boolean,
       overrides?: PayableOverrides & { from?: string }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    pause(overrides?: Overrides & { from?: string }): Promise<BigNumber>;
+
+    paused(overrides?: CallOverrides): Promise<BigNumber>;
 
     pendingOwner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -548,10 +646,18 @@ export interface Gifter extends BaseContract {
       overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
 
+    unpause(overrides?: Overrides & { from?: string }): Promise<BigNumber>;
+
     upgradeToAndCall(
       newImplementation: string,
       data: BytesLike,
       overrides?: PayableOverrides & { from?: string }
+    ): Promise<BigNumber>;
+
+    withdrawAzero(
+      to: string,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<BigNumber>;
   };
 
@@ -583,10 +689,17 @@ export interface Gifter extends BaseContract {
       _token: string,
       _to: string,
       _amount: BigNumberish,
+      _retryable: boolean,
       overrides?: PayableOverrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    pause(
+      overrides?: Overrides & { from?: string }
+    ): Promise<PopulatedTransaction>;
+
+    paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     pendingOwner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -623,10 +736,20 @@ export interface Gifter extends BaseContract {
       overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
 
+    unpause(
+      overrides?: Overrides & { from?: string }
+    ): Promise<PopulatedTransaction>;
+
     upgradeToAndCall(
       newImplementation: string,
       data: BytesLike,
       overrides?: PayableOverrides & { from?: string }
+    ): Promise<PopulatedTransaction>;
+
+    withdrawAzero(
+      to: string,
+      value: BigNumberish,
+      overrides?: Overrides & { from?: string }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -2,7 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { Gifter } from "./Gifter";
-export type { GifterV2 } from "./GifterV2";
 export * as factories from "./factories";
 export { Gifter__factory } from "./factories/Gifter__factory";
-export { GifterV2__factory } from "./factories/GifterV2__factory";

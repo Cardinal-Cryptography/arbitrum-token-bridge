@@ -2,4 +2,3 @@
 /* tslint:disable */
 /* eslint-disable */
 export { Gifter__factory } from "./Gifter__factory";
-export { GifterV2__factory } from "./GifterV2__factory";

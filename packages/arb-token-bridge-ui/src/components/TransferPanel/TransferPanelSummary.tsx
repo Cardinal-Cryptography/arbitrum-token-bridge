@@ -186,6 +186,8 @@ export function TransferPanelSummary({ token }: TransferPanelSummaryProps) {
 
   const [{ amount }] = useArbQueryParams()
 
+  const { estimatedChildChainGasFees } = useGasSummary()
+
   const {
     isArbitrumOne: isDestinationChainArbitrumOne,
     isArbitrumSepolia: isDestinationChainArbitrumSepolia
@@ -248,6 +250,13 @@ export function TransferPanelSummary({ token }: TransferPanelSummaryProps) {
               isParentChain={!isDepositMode}
             />
           )}
+          {/* CHANGE: show how much azero user gets as a gift on L2 */}
+          {' and '}
+          <span className="tabular-nums">
+            {formatAmount(0.2 - (estimatedChildChainGasFees ?? 0), {
+              symbol: childChainNativeCurrency.symbol
+            })}
+          </span>
           {isBridgingEth && (
             <NativeCurrencyPrice amount={Number(amount)} showBrackets />
           )}
