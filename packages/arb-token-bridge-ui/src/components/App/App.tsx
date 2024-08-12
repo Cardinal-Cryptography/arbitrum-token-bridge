@@ -40,6 +40,7 @@ import { ProviderName, trackEvent } from '../../util/AnalyticsUtils'
 import { onDisconnectHandler } from '../../util/walletConnectUtils'
 import { addressIsSmartContract } from '../../util/AddressUtils'
 import Navbar from '../Navbar/Navbar'
+import { ExternalLink } from '../common/ExternalLink'
 
 declare global {
   interface Window {
@@ -238,6 +239,20 @@ function AppContent() {
           <Navbar />
         </div>
         <WelcomeDialog />
+        <div className="fixed bottom-0 flex w-full gap-2 border-t border-gray-400 bg-black px-4 py-2 text-white">
+          <ExternalLink
+            className="hover:opacity-70"
+            href="/files/terms-and-conditions.pdf"
+          >
+            Terms and conditions
+          </ExternalLink>
+          <ExternalLink
+            className="hover:opacity-70"
+            href="/files/privacy-policy.pdf"
+          >
+            Privacy
+          </ExternalLink>
+        </div>
       </>
     )
   }
@@ -253,6 +268,20 @@ function AppContent() {
               Please connect your wallet to use the bridge.
             </p>
           </div>
+        </div>
+        <div className="fixed bottom-0 flex w-full gap-2 border-t border-gray-400 bg-black px-4 py-2 text-white">
+          <ExternalLink
+            className="hover:opacity-70"
+            href="/files/terms-and-conditions.pdf"
+          >
+            Terms and conditions
+          </ExternalLink>
+          <ExternalLink
+            className="hover:opacity-70"
+            href="/files/privacy-policy.pdf"
+          >
+            Privacy
+          </ExternalLink>
         </div>
       </>
     )
@@ -280,6 +309,20 @@ function AppContent() {
       <BalanceUpdater />
       <ArbTokenBridgeStoreSyncWrapper />
       <MainContent />
+      <div className="fixed bottom-0 flex w-full gap-2 border-t border-gray-400 bg-black px-4 py-2 text-white">
+        <ExternalLink
+          className="hover:opacity-70"
+          href="/files/terms-and-conditions.pdf"
+        >
+          Terms and conditions
+        </ExternalLink>
+        <ExternalLink
+          className="hover:opacity-70"
+          href="/files/privacy-policy.pdf"
+        >
+          Privacy
+        </ExternalLink>
+      </div>
     </>
   )
 }

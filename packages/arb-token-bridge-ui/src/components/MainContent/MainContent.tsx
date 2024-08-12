@@ -66,7 +66,6 @@ export function MainContent() {
       <SettingsDialog />
 
       {/* Toggle-able Stats for nerds */}
-      {isArbitrumStatsVisible && <ArbitrumStats />}
-    </>
+      {isArbitrumStatsVisible && <ArbitrumStats />}</>
   )
 }
