@@ -43,19 +43,42 @@ import { DestinationNetworkBox } from './TransferPanelMain/DestinationNetworkBox
 import { SourceNetworkBox } from './TransferPanelMain/SourceNetworkBox'
 import { NetworkType } from './TransferPanelMain/utils'
 
-export function TransferIconBox() {
+export function SwitchNetworksButton(
+  props: React.ButtonHTMLAttributes<HTMLButtonElement>
+) {
+  const { isSmartContractWallet, isLoading: isLoadingAccountType } =
+    useAccountType()
+
+  const disabled = isSmartContractWallet || isLoadingAccountType
+
+  const [networks, setNetworks] = useNetworks()
+
   return (
     <div className="z-[1] flex h-4 w-full items-center justify-center lg:h-1">
-      <div
+      <button
+        type="button"
+        disabled={disabled}
         className={twMerge(
-          'group relative flex h-7 w-7 items-center justify-center rounded bg-gray-1 p-1'
+          'group relative flex h-7 w-7 items-center justify-center rounded bg-gray-1 p-1',
+          disabled && 'pointer-events-none'
         )}
+        onClick={() => {
+          setNetworks({
+            sourceChainId: networks.destinationChain.id,
+            destinationChainId: networks.sourceChain.id
+          })
+        }}
         aria-label="Switch Networks"
+        {...props}
       >
         <SwitchNetworkButtonBorderTop />
-        <ArrowDownIcon className="h-6 w-6 stroke-1 text-white" />
+        {isSmartContractWallet ? (
+          <ArrowDownIcon className="h-6 w-6 stroke-1 text-white" />
+        ) : (
+          <ArrowsUpDownIcon className="h-8 w-8 stroke-1 text-white transition duration-300 group-hover:rotate-180 group-hover:opacity-80" />
+        )}
         <SwitchNetworkButtonBorderBottom />
-      </div>
+      </button>
     </div>
   )
 }
@@ -427,29 +450,7 @@ export function TransferPanelMain({
   ])
 
   return (
-    <div className="flex flex-col pb-6 lg:gap-y-1 ">
-      <div className=" relative mb-2 flex items-center gap-1 rounded border border-amber-500 border-opacity-50 bg-amber-500 bg-opacity-20  p-2 text-amber-100 transition-colors duration-400 lg:mb-1">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="icon icon-tabler icon-tabler-alert-circle stroke-amber-100"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-          <path d="M12 8v4" />
-          <path d="M12 16h.01" />
-        </svg>
-        <p className="mt-0.5">
-          Support for withdrawals from Aleph Zero EVM will be added soon
-        </p>
-      </div>
-
+    <div className="flex flex-col pb-6 lg:gap-y-1">
       <SourceNetworkBox
         amount={amount}
         errorMessage={errorMessage}
@@ -457,7 +458,7 @@ export function TransferPanelMain({
         showUsdcSpecificInfo={showUSDCSpecificInfo}
       />
 
-      <TransferIconBox />
+      <SwitchNetworksButton />
 
       <DestinationNetworkBox
         customFeeTokenBalances={customFeeTokenBalances}

@@ -61,7 +61,7 @@ const l1Networks: { [chainId: number]: L1Network } = {
 
 export const getChains = () => {
   // const chains = [...Object.values(l1Networks), ...getArbitrumNetworks()]
-  const chains = [...Object.values(l1Networks)]
+  const chains = [...Object.values(l1Networks), ...getAlephChains()]
 
   return chains.filter(chain => {
     // exclude L1 chains with no child chains

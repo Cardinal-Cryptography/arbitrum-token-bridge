@@ -29,7 +29,7 @@ export const alephMainnets: {
   [key: number]: AlephZeroChainConfig
 } = {
   41455: {
-    confirmPeriodBlocks: 150, // 20,
+    confirmPeriodBlocks: 45818,
     chainId: 41455,
     parentChainId: 1,
     ethBridge: {
@@ -43,14 +43,14 @@ export const alephMainnets: {
     explorerUrl: 'https://evm-explorer.alephzero.org/',
     rpcUrl: 'https://rpc.alephzero.raas.gelato.cloud',
     name: 'Aleph Zero EVM',
-    slug: 'alephzero',
-    retryableLifetimeSeconds: 604800,
+    slug: 'aleph-zero-evm',
+    retryableLifetimeSeconds: 604800, // 7 days
     isCustom: true,
     isTestnet: false,
     tokenBridge: {
       parentGatewayRouter: '0xeBb17f398ed30d02F2e8733e7c1e5cf566e17812',
       childGatewayRouter: '0xD296d45171B97720D3aBdb68B0232be01F1A9216',
-      parentErc20Gateway: '0xccaF21F002EAF230c9Fa810B34837a3739B70F7B', // StandardGateway
+      parentErc20Gateway: '0xccaF21F002EAF230c9Fa810B34837a3739B70F7B',
       childErc20Gateway: '0x2A5a79061b723BBF453ef7E07c583C750AFb9BD6',
       parentCustomGateway: '0x23fB23e5917777bDF9006112Db4675821743A08a',
       childCustomGateway: '0x2f70c8E4B7e168869db1bA7c33DDeDC90A0618F8',
@@ -65,11 +65,12 @@ export const alephMainnets: {
       gifter: '0xE15AEB63EB2bF58A73DD871f4a1CF0D0A97f80f3'
     },
     bridgeUiConfig: {
-      color: '#036752',
+      color: '#00EAC7',
       network: {
         name: 'Aleph Zero EVM',
         logo: '/images/azero/AzeroLogo.svg',
-        description: 'The Aleph Zero EVM.'
+        description:
+          'Aleph Zero is a Layer 1 with scalable, secure, fast client-side ZK privacy and an EVM Layer 2 for DeFi, gaming, and enterprise solutions.'
       },
       nativeTokenData: {
         name: 'AZERO',
@@ -98,7 +99,7 @@ export const alpehTestnets: { [key in number]: AlephZeroChainConfig } = {
     rpcUrl: 'https://rpc.alephzero-testnet.gelato.digital',
     name: 'Aleph Zero EVM Testnet',
     slug: 'alephzero-testnet',
-    retryableLifetimeSeconds: 604800,
+    retryableLifetimeSeconds: 604800, // 7 days
     isCustom: true,
     isTestnet: true,
     tokenBridge: {
